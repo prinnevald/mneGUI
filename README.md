@@ -1,1 +1,1 @@
-# NAMSpeller
+# mneGUI
