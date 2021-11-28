@@ -42,7 +42,14 @@ class mneGUI(App):
         self.raw_data = raw
 
         self.main_text.text = "Data loaded"
+        self.window.remove_widget(self.load_data_button)
+        self.print_data_button = Button(text="Print raw data")
+        self.print_data_button.bind(on_press = self.print_data)
+        self.window.add_widget(self.print_data_button)
 
+    def print_data(self, instance):
+        raw = self.raw_data
+        self.window.add_widget(Label(text=str(raw.info)))
 
 if __name__ == '__main__':
     mneGUI().run()
