@@ -27,7 +27,8 @@ class mneGUI(App):
         self.window.size_hint = (0.6, 0.7)
         self.window.pos_hint = {"center_x": 0.5, "center_y":0.5}
 
-        self.window.add_widget(FigureCanvasKivyAgg(plt.gcf()))
+        self.plot = FigureCanvasKivyAgg(plt.gcf())
+        self.window.add_widget(self.plot)
 
         self.main_text = Label(
                         text= "Welcome to mneGUI",
