@@ -115,12 +115,16 @@ class mneGUI(App):
         orig_raw.plot(order=chan_idxs, start=12, duration=4)
         self.raw_data.plot(order=chan_idxs, start=12, duration=4)
 
-    def detect_events(self, instance):
+    def events(self, instance):
+        # events button 
+        pass
+
+    def events_find(self, instance):
         events = mne.find_events(self.raw_data, stim_channel='STI 014')
         print(events[:5])  # show the first 5
         self.events = events
     
-    def plot_events(self, instance):
+    def events_plot(self, instance):
         events = self.events
         raw = self.raw_data
         event_dict = {'auditory/left': 1, 'auditory/right': 2, 'visual/left': 3,
@@ -129,7 +133,11 @@ class mneGUI(App):
         fig = mne.viz.plot_events(events, event_id=event_dict, sfreq=raw.info['sfreq'],
                           first_samp=raw.first_samp)
 
-    def epoching(self, instance):
+    def epoch(self, instance):
+        # epoch button
+        pass
+
+    def epoching_pool(self, instance):
         events = self.events
         raw = self.raw_data
         event_dict = self.event_dict
@@ -147,16 +155,24 @@ class mneGUI(App):
         self.vis_epochs = epochs['visual']
         del raw, epochs  # free up memory
         # logs here
+    
+    def epoching_plot(self, instance):
         self.aud_epochs.plot_image(picks=['MEG 1332', 'EEG 021']) 
         # graph here and logs
 
     def time_frequency(self, instance):
+        pass
+
+    def time_frequency_plot(self, instance):
         frequencies = np.arange(7, 30, 3)
         power = mne.time_frequency.tfr_morlet(self.aud_epochs, n_cycles=2, return_itc=False,
                                             freqs=frequencies, decim=3)
         power.plot(['MEG 1332'])
-    
+
     def evoked(self, instance):
+        pass
+    
+    def evoked_compare(self, instance):
         self.aud_evoked = self.aud_epochs.average()
         self.vis_evoked = self.vis_epochs.average()
 
@@ -164,7 +180,7 @@ class mneGUI(App):
                                     legend='upper left', show_sensors='upper right')
         # graph and logs
 
-    def evoked_detailed(self, instance):
+    def evoked_detailed_plot(self, instance):
         self.aud_evoked.plot_joint(picks='eeg')
         self.aud_evoked.plot_topomap(times=[0., 0.08, 0.1, 0.12, 0.2], ch_type='eeg')
         # graph and logs
@@ -174,6 +190,9 @@ class mneGUI(App):
         evoked_diff.pick_types(meg='mag').plot_topo(color='r', legend=False)
 
     def inverse_modeling(self, instance):
+        pass
+
+    def inverse_modeling_estimate_origins(self, instance):
         # load inverse operator
         inverse_operator_file = os.path.join(self.sample_data_folder, 'MEG', 'sample',
                                             'sample_audvis-meg-oct-6-meg-inv.fif')
@@ -195,6 +214,10 @@ class mneGUI(App):
         self.stc.plot(initial_time=0.1, hemi='split', views=['lat', 'med'],
                 subjects_dir=subjects_dir)
         # graph here, logs here
+
+    def finish(self, instance):
+        pass
+    # terminates the program
 
 if __name__ == '__main__':
     mneGUI().run()
