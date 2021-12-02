@@ -3,7 +3,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
 from kivy.uix.button import Button
-from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
+#from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 
 import matplotlib
 matplotlib.use('Agg')
@@ -40,36 +40,59 @@ class mneGUI(App):
         return self.window
 
     def load_data(self, instance):
-        sample_data_folder = mne.datasets.sample.data_path()
-        self.sample_data_folder = sample_data_folder
-        sample_data_raw_file = os.path.join(sample_data_folder, 'MEG', 'sample',
-                                            'sample_audvis_filt-0-40_raw.fif')
-        raw = mne.io.read_raw_fif(sample_data_raw_file)
+    #     self.sample_data_folder = mne.datasets.sample.data_path()
+    #     sample_data_raw_file = os.path.join(self.sample_data_folder, 'MEG', 'sample',
+    #                                         'sample_audvis_filt-0-40_raw.fif')
+    #     raw = mne.io.read_raw_fif(sample_data_raw_file)
 
-        self.raw_data = raw
+    #     self.raw_data = raw
 
         self.main_text.text = "Data loaded"
         self.window.remove_widget(self.load_data_button)
         self.print_data_button = Button(text="Print raw data")
         self.print_data_button.bind(on_press = self.print_data)
         self.window.add_widget(self.print_data_button)
+        
 
         self.show_data_button = Button(text="Show Data")
         self.show_data_button.bind(on_press = self.show_data)
         self.window.add_widget(self.show_data_button)
 
+        self.preprocess_data_button = Button(text="Preprocess")
+        self.preprocess_data_button.bind(on_press = self.preprocessing)
+        self.window.add_widget(self.preprocess_data_button)
+
     def print_data(self, instance):
-        raw = self.raw_data
-        self.window.add_widget(Label(text=str(raw.info)))
+        pass
+        # raw = self.raw_data
+        # self.window.add_widget(Label(text=str(raw.info)))
 
     def show_data(self, instance):
-        data = self.raw_data.get_data()
-        plt.plot(data)
-        self.plot = FigureCanvasKivyAgg(plt.gcf())
-        self.window.add_widget(self.plot)
+        # data = self.raw_data.get_data()
+        # plt.plot(data)
+        # self.plot = FigureCanvasKivyAgg(plt.gcf())
+        # self.window.add_widget(self.plot)
+        print("meow")
 
     # NOT USED FUNCTIONS
     def preprocessing(self, instance):
+        self.window.remove_widget(self.preprocess_data_button)
+        self.window.remove_widget(self.print_data_button)
+        self.window.remove_widget(self.show_data_button)
+
+        self.see_graph_button = Button(text="See graphs")
+        self.see_graph_button.bind(on_press = self.preprocessing_see_graphs)
+        self.window.add_widget(self.see_graph_button)
+
+        self.frontal_button = Button(text="Show frontal channels")
+        self.frontal_button.bind(on_press = self.preprocessing_remove_components)
+        self.window.add_widget(self.frontal_button)
+
+        self.epochs_button = Button(text="Epochs")
+        self.epochs_button.bind(on_press = self.epoching)
+        self.window.add_widget(self.epochs_button)
+        
+    def preprocessing_see_graphs(self, instance):
         # set up and fit the ICA
         ica = mne.preprocessing.ICA(n_components=20, random_state=97, max_iter=800)
         ica.fit(self.raw_data)
