@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
+from kivy.clock import Clock
 from kivy.uix.button import Button
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 
@@ -11,12 +12,26 @@ matplotlib.use('Agg')
 import os
 import numpy as np
 import mne
+import sys
 import matplotlib.pyplot as plt
-import threading
+
+class RedirectText(object):
+    """"""
+ 
+    #----------------------------------------------------------------------
+    def __init__(self, text_ctrl):
+        """Constructor"""
+        self.text = text_ctrl
+ 
+    #----------------------------------------------------------------------
+    def write(self, string):
+        """"""
+        self.text = self.text + "\r" + string
 
 
 class mneGUI(App):
     def build(self):
+
         self.window = GridLayout()
         self.window.cols = 1
         self.window.size_hint = (0.6, 0.7)
@@ -36,6 +51,17 @@ class mneGUI(App):
         self.load_data_button = Button(text="Load Data")
         self.load_data_button.bind(on_press = self.load_data)
         self.window.add_widget(self.load_data_button)
+
+
+        self.log_text = Label(
+                        text= "Log",
+                        font_size= 12,
+                        color= '#FFFFFF'
+                        )
+        self.window.add_widget(self.log_text)
+        # redirect stdout
+        redir = RedirectText(self.log_text)
+        sys.stdout = redir
 
         return self.window
 
