@@ -54,7 +54,7 @@ class mneGUI(App):
         self.window.add_widget(self.print_data_button)
         
 
-        self.show_data_button = Button(text="Show Data")
+        self.show_data_button = Button(text="Visualize")
         self.show_data_button.bind(on_press = self.show_data)
         self.window.add_widget(self.show_data_button)
 
@@ -84,13 +84,13 @@ class mneGUI(App):
         self.see_graph_button.bind(on_press = self.preprocessing_see_graphs)
         self.window.add_widget(self.see_graph_button)
 
-        self.frontal_button = Button(text="Show frontal channels")
-        self.frontal_button.bind(on_press = self.preprocessing_remove_components)
-        self.window.add_widget(self.frontal_button)
+        self.remove_button = Button(text="Remove components")
+        self.remove_button.bind(on_press = self.preprocessing_remove_components)
+        self.window.add_widget(self.remove_button)
 
-        self.epochs_button = Button(text="Epochs")
-        self.epochs_button.bind(on_press = self.epoching)
-        self.window.add_widget(self.epochs_button)
+        self.events_button = Button(text="Events")
+        self.events_button.bind(on_press = self.events)
+        self.window.add_widget(self.events_button)
         
     def preprocessing_see_graphs(self, instance):
         # set up and fit the ICA
@@ -117,7 +117,22 @@ class mneGUI(App):
 
     def events(self, instance):
         # events button 
-        pass
+        self.window.remove_widget(self.see_graph_button)
+        self.window.remove_widget(self.remove_button)
+        self.window.remove_widget(self.events_button)
+
+        self.find_events_button = Button(text="Find events")
+        self.find_events_button.bind(on_press = self.events_find)
+        self.window.add_widget(self.find_events_button)
+
+        self.plot_events_button = Button(text="Plot events")
+        self.plot_events_button.bind(on_press = self.events_plot)
+        self.window.add_widget(self.plot_events_button)
+
+        self.epochs_button = Button(text="Epoch")
+        self.epochs_button.bind(on_press = self.epoch)
+        self.window.add_widget(self.epochs_button)
+        
 
     def events_find(self, instance):
         events = mne.find_events(self.raw_data, stim_channel='STI 014')
@@ -135,7 +150,22 @@ class mneGUI(App):
 
     def epoch(self, instance):
         # epoch button
-        pass
+        self.window.remove_widget(self.find_events_button)
+        self.window.remove_widget(self.plot_events_button)
+        self.window.remove_widget(self.epochs_button)
+
+        self.pool_button = Button(text="Pool")
+        self.pool_button.bind(on_press = self.epoching_pool)
+        self.window.add_widget(self.pool_button)
+
+        self.plot_button = Button(text="Plot")
+        self.plot_button.bind(on_press = self.epoching_plot)
+        self.window.add_widget(self.plot_button)
+
+        self.time_frequency_button = Button(text="Time frequency analysis")
+        self.time_frequency_button.bind(on_press = self.time_frequency)
+        self.window.add_widget(self.time_frequency_button)
+        
 
     def epoching_pool(self, instance):
         events = self.events
@@ -161,7 +191,17 @@ class mneGUI(App):
         # graph here and logs
 
     def time_frequency(self, instance):
-        pass
+        self.window.remove_widget(self.pool_button)
+        self.window.remove_widget(self.plot_button)
+        self.window.remove_widget(self.time_frequency_button)
+
+        self.frequency_plot_button = Button(text="Plot")
+        self.frequency_plot_button.bind(on_press = self.time_frequency_plot)
+        self.window.add_widget(self.frequency_plot_button)
+
+        self.evoked_button = Button(text="Estimate evoked responses")
+        self.evoked_button.bind(on_press = self.evoked)
+        self.window.add_widget(self.evoked_button)
 
     def time_frequency_plot(self, instance):
         frequencies = np.arange(7, 30, 3)
@@ -170,7 +210,25 @@ class mneGUI(App):
         power.plot(['MEG 1332'])
 
     def evoked(self, instance):
-        pass
+        self.window.remove_widget(self.frequency_plot_button)
+        self.window.remove_widget(self.evoked_button)
+        
+
+        self.compare_button = Button(text="Compare")
+        self.compare_button.bind(on_press = self.evoked_compare)
+        self.window.add_widget(self.compare_button)
+
+        self.difference_wave_button = Button(text="Difference wave")
+        self.difference_wave_button.bind(on_press = self.evoked_difference_wave)
+        self.window.add_widget(self.difference_wave_button)
+
+        self.detailed_plot_button = Button(text="Detailed plot")
+        self.detailed_plot_button.bind(on_press = self.evoked_detailed_plot)
+        self.window.add_widget(self.detailed_plot_button)
+
+        self.inverse_modeling_button = Button(text="Inverse modeling")
+        self.inverse_modeling_button.bind(on_press = self.inverse_modeling)
+        self.window.add_widget(self.inverse_modeling_button)
     
     def evoked_compare(self, instance):
         self.aud_evoked = self.aud_epochs.average()
@@ -190,7 +248,23 @@ class mneGUI(App):
         evoked_diff.pick_types(meg='mag').plot_topo(color='r', legend=False)
 
     def inverse_modeling(self, instance):
-        pass
+        self.window.remove_widget(self.compare_button)
+        self.window.remove_widget(self.difference_wave_button)
+        self.window.remove_widget(self.detailed_plot_button)
+        self.window.remove_widget(self.inverse_modeling_button)
+
+        self.estimate_origins_button = Button(text="Estimate origins")
+        self.estimate_origins_button.bind(on_press = self.inverse_modeling_estimate_origins)
+        self.window.add_widget(self.estimate_origins_button)
+
+        self.modeling_plot_button = Button(text="Plot")
+        self.modeling_plot_button.bind(on_press = self.inverse_modeling_plot)
+        self.window.add_widget(self.modeling_plot_button)
+
+        self.finish_button = Button(text="Finish")
+        self.finish_button.bind(on_press = self.finish)
+        self.window.add_widget(self.finish_button)
+        
 
     def inverse_modeling_estimate_origins(self, instance):
         # load inverse operator
@@ -216,7 +290,7 @@ class mneGUI(App):
         # graph here, logs here
 
     def finish(self, instance):
-        pass
+        quit()
     # terminates the program
 
 if __name__ == '__main__':
