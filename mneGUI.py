@@ -2,18 +2,16 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
-from kivy.clock import Clock
 from kivy.uix.button import Button
 from kivy.uix.image import Image
-from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
-
+#from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
+from kivy.core.window import Window
 import matplotlib
 matplotlib.use('Agg')
 
 import os
 import numpy as np
 import mne
-import sys
 import matplotlib.pyplot as plt
 import threading
 import io
@@ -35,6 +33,7 @@ class Logger():
 
 with redirect_stdout(f):
     class mneGUI(App):
+        Window.clearcolor = (0.92, 0.89, 0.72, 1)
         def build(self):
             # generate general layout
             self.window = BoxLayout(orientation = "vertical")
@@ -42,11 +41,14 @@ with redirect_stdout(f):
             self.section1 = BoxLayout(orientation = "horizontal") # title
             self.section2 = BoxLayout(orientation = "horizontal") # output
             self.section3 = BoxLayout(orientation = "horizontal") # buttons
-            self.section4 = BoxLayout(orientation = "horizontal")
+           # self.section4 = BoxLayout(orientation = "horizontal")
+            self.section3 = BoxLayout(spacing=20) # buttons
+            self.section3 = BoxLayout(padding=0) # buttons
+            self.section3 = BoxLayout(orientation = "horizontal")
             self.window.add_widget(self.section1)
             self.window.add_widget(self.section2)
             self.window.add_widget(self.section3)
-            self.window.add_widget(self.section4)
+            #self.window.add_widget(self.section4)
 
             # styling
             self.window.cols = 1
@@ -57,15 +59,15 @@ with redirect_stdout(f):
             # self.window.add_widget(self.plot)
 
             self.main_text = Label(
-                            text= "Welcome to mneGUI",
-                            font_size= 18,
-                            color= '#00FFCE'
+                            text= "Welcome to mneGUI!",
+                            font_size= 30,
+                            color= 'D36135'
                             )
             self.section2.add_widget(self.main_text)
             title_img = Image(source='images/title_icon.png')
             self.section1.add_widget(title_img)
 
-            self.load_data_button = Button(text="Load Data >")
+            self.load_data_button = Button(text="Load Data >",background_color=(0.82,0.38,0.21,1),border=(25,25,25,25))
             self.load_data_button.bind(on_press = self.load_data)
             self.section3.add_widget(self.load_data_button)
 
@@ -91,21 +93,21 @@ with redirect_stdout(f):
 
             self.main_text.text = "Data loaded"
             self.section3.remove_widget(self.load_data_button)
-            self.print_data_button = Button(text="Print raw data")
+            self.print_data_button = Button(text="Print raw data",size_hint=(.5, .5), background_color=(0.82,0.38,0.21,1))
             self.print_data_button.bind(on_press = self.print_data)
             self.section3.add_widget(self.print_data_button)
 
-            self.show_data_button = Button(text="Visualize")
+            self.show_data_button = Button(text="Visualize",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.show_data_button.bind(on_press = self.show_data)
             self.section3.add_widget(self.show_data_button)
 
-            self.preprocess_data_button = Button(text="Preprocess >")
+            self.preprocess_data_button = Button(text="Preprocess >",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.preprocess_data_button.bind(on_press = self.preprocessing)
             self.section3.add_widget(self.preprocess_data_button)
 
 
         def print_data(self, instance):
-            print(self.raw_data.info)
+            self.main_text.text = str(self.raw_data)
 
         def show_data(self, instance):
             # data = self.raw_data.get_data()
@@ -126,15 +128,15 @@ with redirect_stdout(f):
             self.section3.remove_widget(self.print_data_button)
             self.section3.remove_widget(self.show_data_button)
 
-            self.see_graph_button = Button(text="See graphs")
+            self.see_graph_button = Button(text="See graphs",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.see_graph_button.bind(on_press = self.preprocessing_see_graphs)
             self.section3.add_widget(self.see_graph_button)
 
-            self.remove_button = Button(text="Remove components")
+            self.remove_button = Button(text="Remove components", size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.remove_button.bind(on_press = self.preprocessing_remove_components)
             self.section3.add_widget(self.remove_button)
 
-            self.events_button = Button(text="Events >")
+            self.events_button = Button(text="Events >",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.events_button.bind(on_press = self.events)
             self.section3.add_widget(self.events_button)
             
@@ -179,15 +181,15 @@ with redirect_stdout(f):
             self.section3.remove_widget(self.remove_button)
             self.section3.remove_widget(self.events_button)
 
-            self.find_events_button = Button(text="Find events")
+            self.find_events_button = Button(text="Find events",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.find_events_button.bind(on_press = self.events_find)
             self.section3.add_widget(self.find_events_button)
 
-            self.plot_events_button = Button(text="Plot events")
+            self.plot_events_button = Button(text="Plot events",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.plot_events_button.bind(on_press = self.events_plot)
             self.section3.add_widget(self.plot_events_button)
 
-            self.epochs_button = Button(text="Epoch >")
+            self.epochs_button = Button(text="Epoch >",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.epochs_button.bind(on_press = self.epoch)
             self.section3.add_widget(self.epochs_button)
             
@@ -216,15 +218,15 @@ with redirect_stdout(f):
             self.section3.remove_widget(self.plot_events_button)
             self.section3.remove_widget(self.epochs_button)
 
-            self.pool_button = Button(text="Pool")
+            self.pool_button = Button(text="Pool",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.pool_button.bind(on_press = self.epoching_pool)
             self.section3.add_widget(self.pool_button)
 
-            self.plot_button = Button(text="Plot")
+            self.plot_button = Button(text="Plot",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.plot_button.bind(on_press = self.epoching_plot)
             self.section3.add_widget(self.plot_button)
 
-            self.time_frequency_button = Button(text="Time frequency analysis >")
+            self.time_frequency_button = Button(text="Time frequency analysis >",font_size=12,size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.time_frequency_button.bind(on_press = self.time_frequency)
             self.section3.add_widget(self.time_frequency_button)
             
@@ -263,11 +265,11 @@ with redirect_stdout(f):
             self.section3.remove_widget(self.plot_button)
             self.section3.remove_widget(self.time_frequency_button)
 
-            self.frequency_plot_button = Button(text="Plot")
+            self.frequency_plot_button = Button(text="Plot",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.frequency_plot_button.bind(on_press = self.time_frequency_plot)
             self.section3.add_widget(self.frequency_plot_button)
 
-            self.evoked_button = Button(text="Estimate evoked responses >")
+            self.evoked_button = Button(text="Estimate evoked responses >",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.evoked_button.bind(on_press = self.evoked)
             self.section3.add_widget(self.evoked_button)
 
@@ -284,19 +286,19 @@ with redirect_stdout(f):
             self.section3.remove_widget(self.frequency_plot_button)
             self.section3.remove_widget(self.evoked_button)
 
-            self.compare_button = Button(text="Compare")
+            self.compare_button = Button(text="Compare",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.compare_button.bind(on_press = self.evoked_compare)
             self.section3.add_widget(self.compare_button)
 
-            self.difference_wave_button = Button(text="Difference wave")
+            self.difference_wave_button = Button(text="Difference wave",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.difference_wave_button.bind(on_press = self.evoked_difference_wave)
             self.section3.add_widget(self.difference_wave_button)
 
-            self.detailed_plot_button = Button(text="Detailed plot")
+            self.detailed_plot_button = Button(text="Detailed plot",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.detailed_plot_button.bind(on_press = self.evoked_detailed_plot)
             self.section3.add_widget(self.detailed_plot_button)
 
-            self.inverse_modeling_button = Button(text="Inverse modeling >")
+            self.inverse_modeling_button = Button(text="Inverse modeling >",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.inverse_modeling_button.bind(on_press = self.inverse_modeling)
             self.section3.add_widget(self.inverse_modeling_button)
         
@@ -341,15 +343,15 @@ with redirect_stdout(f):
             self.section3.remove_widget(self.detailed_plot_button)
             self.section3.remove_widget(self.inverse_modeling_button)
 
-            self.estimate_origins_button = Button(text="Estimate origins")
+            self.estimate_origins_button = Button(text="Estimate origins",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.estimate_origins_button.bind(on_press = self.inverse_modeling_estimate_origins)
             self.section3.add_widget(self.estimate_origins_button)
 
-            self.modeling_plot_button = Button(text="Plot")
+            self.modeling_plot_button = Button(text="Plot",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.modeling_plot_button.bind(on_press = self.inverse_modeling_plot)
             self.section3.add_widget(self.modeling_plot_button)
 
-            self.finish_button = Button(text="Finish >")
+            self.finish_button = Button(text="Finish >",size_hint=(.5, .5),background_color=(0.82,0.38,0.21,1))
             self.finish_button.bind(on_press = self.finish)
             self.section3.add_widget(self.finish_button)
             
