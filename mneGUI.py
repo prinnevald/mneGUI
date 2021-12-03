@@ -1,8 +1,10 @@
 from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.uix.image import Image
+from kivy.uix.widget import Widget
 #from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 
 import matplotlib
@@ -14,28 +16,40 @@ import mne
 import matplotlib.pyplot as plt
 import threading
 
-
 class mneGUI(App):
     def build(self):
-        self.window = GridLayout()
-        self.window.cols = 1
+        # generate general layout
+        self.window = BoxLayout(orientation = "vertical")
+        #divide into sections 
+        self.section1 = BoxLayout(orientation = "horizontal") # title
+        self.section2 = BoxLayout(orientation = "horizontal") # output
+        self.section3 = BoxLayout(orientation = "horizontal") # buttons
+        # section4 = BoxLayout(orientation = "horizontal")
+        self.window.add_widget(self.section1)
+        self.window.add_widget(self.section2)
+        self.window.add_widget(self.section3)
+        # self.window.add_widget(section4)
+
+        # styling
         self.window.size_hint = (0.6, 0.7)
         self.window.pos_hint = {"center_x": 0.5, "center_y":0.5}
 
         # self.plot = FigureCanvasKivyAgg(plt.gcf())
         # self.window.add_widget(self.plot)
 
+        title_img = Image(source='title_icon.png')
+        self.section1.add_widget(title_img)
+
         self.main_text = Label(
                         text= "Welcome to mneGUI",
                         font_size= 18,
                         color= '#00FFCE'
                         )
-        self.window.add_widget(self.main_text)
+        self.section2.add_widget(self.main_text)
 
-
-        self.load_data_button = Button(text="Load Data")
+        self.load_data_button = Button(text="Load Data >")
         self.load_data_button.bind(on_press = self.load_data)
-        self.window.add_widget(self.load_data_button)
+        self.section3.add_widget(self.load_data_button)
 
         return self.window
 
@@ -48,19 +62,19 @@ class mneGUI(App):
     #     self.raw_data = raw
 
         self.main_text.text = "Data loaded"
-        self.window.remove_widget(self.load_data_button)
+        self.section3.remove_widget(self.load_data_button)
         self.print_data_button = Button(text="Print raw data")
         self.print_data_button.bind(on_press = self.print_data)
-        self.window.add_widget(self.print_data_button)
+        self.section3.add_widget(self.print_data_button)
         
 
         self.show_data_button = Button(text="Visualize")
         self.show_data_button.bind(on_press = self.show_data)
-        self.window.add_widget(self.show_data_button)
+        self.section3.add_widget(self.show_data_button)
 
-        self.preprocess_data_button = Button(text="Preprocess")
+        self.preprocess_data_button = Button(text="Preprocess >")
         self.preprocess_data_button.bind(on_press = self.preprocessing)
-        self.window.add_widget(self.preprocess_data_button)
+        self.section3.add_widget(self.preprocess_data_button)
 
     def print_data(self, instance):
         pass
@@ -74,23 +88,23 @@ class mneGUI(App):
         # self.window.add_widget(self.plot)
         print("meow")
 
-    # NOT USED FUNCTIONS
+    # NOT USED FUNCTIONSxf
     def preprocessing(self, instance):
-        self.window.remove_widget(self.preprocess_data_button)
-        self.window.remove_widget(self.print_data_button)
-        self.window.remove_widget(self.show_data_button)
+        self.section3.remove_widget(self.preprocess_data_button)
+        self.section3.remove_widget(self.print_data_button)
+        self.section3.remove_widget(self.show_data_button)
 
         self.see_graph_button = Button(text="See graphs")
         self.see_graph_button.bind(on_press = self.preprocessing_see_graphs)
-        self.window.add_widget(self.see_graph_button)
+        self.section3.add_widget(self.see_graph_button)
 
         self.remove_button = Button(text="Remove components")
         self.remove_button.bind(on_press = self.preprocessing_remove_components)
-        self.window.add_widget(self.remove_button)
+        self.section3.add_widget(self.remove_button)
 
-        self.events_button = Button(text="Events")
+        self.events_button = Button(text="Events >")
         self.events_button.bind(on_press = self.events)
-        self.window.add_widget(self.events_button)
+        self.section3.add_widget(self.events_button)
         
     def preprocessing_see_graphs(self, instance):
         # set up and fit the ICA
@@ -117,21 +131,21 @@ class mneGUI(App):
 
     def events(self, instance):
         # events button 
-        self.window.remove_widget(self.see_graph_button)
-        self.window.remove_widget(self.remove_button)
-        self.window.remove_widget(self.events_button)
+        self.section3.remove_widget(self.see_graph_button)
+        self.section3.remove_widget(self.remove_button)
+        self.section3.remove_widget(self.events_button)
 
         self.find_events_button = Button(text="Find events")
         self.find_events_button.bind(on_press = self.events_find)
-        self.window.add_widget(self.find_events_button)
+        self.section3.add_widget(self.find_events_button)
 
         self.plot_events_button = Button(text="Plot events")
         self.plot_events_button.bind(on_press = self.events_plot)
-        self.window.add_widget(self.plot_events_button)
+        self.section3.add_widget(self.plot_events_button)
 
-        self.epochs_button = Button(text="Epoch")
+        self.epochs_button = Button(text="Epoch >")
         self.epochs_button.bind(on_press = self.epoch)
-        self.window.add_widget(self.epochs_button)
+        self.section3.add_widget(self.epochs_button)
         
 
     def events_find(self, instance):
@@ -150,21 +164,21 @@ class mneGUI(App):
 
     def epoch(self, instance):
         # epoch button
-        self.window.remove_widget(self.find_events_button)
-        self.window.remove_widget(self.plot_events_button)
-        self.window.remove_widget(self.epochs_button)
+        self.section3.remove_widget(self.find_events_button)
+        self.section3.remove_widget(self.plot_events_button)
+        self.section3.remove_widget(self.epochs_button)
 
         self.pool_button = Button(text="Pool")
         self.pool_button.bind(on_press = self.epoching_pool)
-        self.window.add_widget(self.pool_button)
+        self.section3.add_widget(self.pool_button)
 
         self.plot_button = Button(text="Plot")
         self.plot_button.bind(on_press = self.epoching_plot)
-        self.window.add_widget(self.plot_button)
+        self.section3.add_widget(self.plot_button)
 
-        self.time_frequency_button = Button(text="Time frequency analysis")
+        self.time_frequency_button = Button(text="Time frequency analysis >")
         self.time_frequency_button.bind(on_press = self.time_frequency)
-        self.window.add_widget(self.time_frequency_button)
+        self.section3.add_widget(self.time_frequency_button)
         
 
     def epoching_pool(self, instance):
@@ -191,17 +205,17 @@ class mneGUI(App):
         # graph here and logs
 
     def time_frequency(self, instance):
-        self.window.remove_widget(self.pool_button)
-        self.window.remove_widget(self.plot_button)
-        self.window.remove_widget(self.time_frequency_button)
+        self.section3.remove_widget(self.pool_button)
+        self.section3.remove_widget(self.plot_button)
+        self.section3.remove_widget(self.time_frequency_button)
 
         self.frequency_plot_button = Button(text="Plot")
         self.frequency_plot_button.bind(on_press = self.time_frequency_plot)
-        self.window.add_widget(self.frequency_plot_button)
+        self.section3.add_widget(self.frequency_plot_button)
 
-        self.evoked_button = Button(text="Estimate evoked responses")
+        self.evoked_button = Button(text="Estimate evoked responses >")
         self.evoked_button.bind(on_press = self.evoked)
-        self.window.add_widget(self.evoked_button)
+        self.section3.add_widget(self.evoked_button)
 
     def time_frequency_plot(self, instance):
         frequencies = np.arange(7, 30, 3)
@@ -210,25 +224,25 @@ class mneGUI(App):
         power.plot(['MEG 1332'])
 
     def evoked(self, instance):
-        self.window.remove_widget(self.frequency_plot_button)
-        self.window.remove_widget(self.evoked_button)
+        self.section3.remove_widget(self.frequency_plot_button)
+        self.section3.remove_widget(self.evoked_button)
         
 
         self.compare_button = Button(text="Compare")
         self.compare_button.bind(on_press = self.evoked_compare)
-        self.window.add_widget(self.compare_button)
+        self.section3.add_widget(self.compare_button)
 
         self.difference_wave_button = Button(text="Difference wave")
         self.difference_wave_button.bind(on_press = self.evoked_difference_wave)
-        self.window.add_widget(self.difference_wave_button)
+        self.section3.add_widget(self.difference_wave_button)
 
         self.detailed_plot_button = Button(text="Detailed plot")
         self.detailed_plot_button.bind(on_press = self.evoked_detailed_plot)
-        self.window.add_widget(self.detailed_plot_button)
+        self.section3.add_widget(self.detailed_plot_button)
 
-        self.inverse_modeling_button = Button(text="Inverse modeling")
+        self.inverse_modeling_button = Button(text="Inverse modeling >")
         self.inverse_modeling_button.bind(on_press = self.inverse_modeling)
-        self.window.add_widget(self.inverse_modeling_button)
+        self.section3.add_widget(self.inverse_modeling_button)
     
     def evoked_compare(self, instance):
         self.aud_evoked = self.aud_epochs.average()
@@ -248,22 +262,22 @@ class mneGUI(App):
         evoked_diff.pick_types(meg='mag').plot_topo(color='r', legend=False)
 
     def inverse_modeling(self, instance):
-        self.window.remove_widget(self.compare_button)
-        self.window.remove_widget(self.difference_wave_button)
-        self.window.remove_widget(self.detailed_plot_button)
-        self.window.remove_widget(self.inverse_modeling_button)
+        self.section3.remove_widget(self.compare_button)
+        self.section3.remove_widget(self.difference_wave_button)
+        self.section3.remove_widget(self.detailed_plot_button)
+        self.section3.remove_widget(self.inverse_modeling_button)
 
         self.estimate_origins_button = Button(text="Estimate origins")
         self.estimate_origins_button.bind(on_press = self.inverse_modeling_estimate_origins)
-        self.window.add_widget(self.estimate_origins_button)
+        self.section3.add_widget(self.estimate_origins_button)
 
         self.modeling_plot_button = Button(text="Plot")
         self.modeling_plot_button.bind(on_press = self.inverse_modeling_plot)
-        self.window.add_widget(self.modeling_plot_button)
+        self.section3.add_widget(self.modeling_plot_button)
 
-        self.finish_button = Button(text="Finish")
+        self.finish_button = Button(text="Finish >")
         self.finish_button.bind(on_press = self.finish)
-        self.window.add_widget(self.finish_button)
+        self.section3.add_widget(self.finish_button)
         
 
     def inverse_modeling_estimate_origins(self, instance):
