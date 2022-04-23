@@ -81,7 +81,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>visual_comp/blank_circle.png</pixmap>
+     <pixmap>visual_comp/filled_circle.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="circle_4">
@@ -89,22 +89,6 @@
      <rect>
       <x>56</x>
       <y>425</y>
-      <width>15</width>
-      <height>15</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>visual_comp/blank_circle.png</pixmap>
-    </property>
-   </widget>
-   <widget class="QLabel" name="circle_5">
-    <property name="geometry">
-     <rect>
-      <x>56</x>
-      <y>373</y>
       <width>15</width>
       <height>15</height>
      </rect>
@@ -185,8 +169,8 @@
      <font>
       <family>Roboto</family>
       <pointsize>20</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
@@ -194,54 +178,6 @@
     </property>
     <property name="text">
      <string>Preprocess</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="menu_3">
-    <property name="geometry">
-     <rect>
-      <x>79</x>
-      <y>314</y>
-      <width>161</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Roboto</family>
-      <pointsize>20</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(145, 153, 158);</string>
-    </property>
-    <property name="text">
-     <string>Events</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="menu_4">
-    <property name="geometry">
-     <rect>
-      <x>79</x>
-      <y>366</y>
-      <width>161</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Roboto</family>
-      <pointsize>20</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(145, 153, 158);</string>
-    </property>
-    <property name="text">
-     <string>Epoch</string>
     </property>
    </widget>
    <widget class="QLabel" name="menu_5">
@@ -337,7 +273,7 @@
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>PREPROCESSING</string>
+     <string>EPOCH DATA</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -359,7 +295,8 @@
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>We preprocess our data to make it more suitable for training and obtaining the best results. Here we clean up our data by performing independent components analysis (ICA). We exclude unneeded parameters and apply the ICA. </string>
+     <string>An epoch indicates the number of passes of the entire training dataset the machine learning algorithm has completed. In this step, we reject any epoch where peak-to-peak signal amplitude is beyond reasonable limits for that channel type. “Image map” shows each epoch as one row of an image map, with color representing signal magnitude; the average evoked response and the sensor location.
+</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -368,7 +305,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="button_dropepochs">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -381,10 +318,10 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>visual_comp/button_preprocess1.png</pixmap>
+     <pixmap>visual_comp/button_drop_epochs.png</pixmap>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="button_imagemap">
     <property name="geometry">
      <rect>
       <x>680</x>
@@ -397,16 +334,16 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>visual_comp/button_preprocess2.png</pixmap>
+     <pixmap>visual_comp/button_imagemap.png</pixmap>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="button_tfa">
     <property name="geometry">
      <rect>
-      <x>1190</x>
+      <x>1110</x>
       <y>250</y>
-      <width>125</width>
-      <height>19</height>
+      <width>181</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="font">
@@ -417,17 +354,20 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 159, 141);</string>
     </property>
     <property name="text">
-     <string>Detect events</string>
+     <string>Time-frequency analysis</string>
     </property>
-    <property name="pixmap">
-     <pixmap>../../.designer/backup/visual_comp/raw_preprocess_button.png</pixmap>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="button_choosedataset">
     <property name="geometry">
      <rect>
       <x>55</x>
@@ -457,6 +397,70 @@
     </property>
     <property name="pixmap">
      <pixmap>visual_comp/arrow.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>314</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Events</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>366</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Epoch</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="circle_8">
+    <property name="geometry">
+     <rect>
+      <x>56</x>
+      <y>370</y>
+      <width>15</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/filled_circle.png</pixmap>
     </property>
    </widget>
   </widget>

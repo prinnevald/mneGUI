@@ -97,7 +97,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>visual_comp/blank_circle.png</pixmap>
+     <pixmap>visual_comp/filled_circle.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="circle_6">
@@ -185,7 +185,7 @@
      <rect>
       <x>79</x>
       <y>418</y>
-      <width>221</width>
+      <width>231</width>
       <height>21</height>
      </rect>
     </property>
@@ -193,12 +193,12 @@
      <font>
       <family>Roboto</family>
       <pointsize>20</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(145, 153, 158);</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Time-frequency analysis</string>
@@ -257,7 +257,7 @@
      <rect>
       <x>470</x>
       <y>72</y>
-      <width>221</width>
+      <width>461</width>
       <height>21</height>
      </rect>
     </property>
@@ -273,7 +273,7 @@
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>EPOCH DATA</string>
+     <string>TIME-FREQUENCY ANALYSIS</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -295,8 +295,7 @@
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>An epoch indicates the number of passes of the entire training dataset the machine learning algorithm has completed. In this step, we reject any epoch where peak-to-peak signal amplitude is beyond reasonable limits for that channel type. “Image map” shows each epoch as one row of an image map, with color representing signal magnitude; the average evoked response and the sensor location.
-</string>
+     <string>Here we compute for the auditory epochs the induced power at different frequencies and times, using Morlet wavelets</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -305,12 +304,12 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="button_computetfa">
     <property name="geometry">
      <rect>
       <x>470</x>
       <y>236</y>
-      <width>165</width>
+      <width>281</width>
       <height>47</height>
      </rect>
     </property>
@@ -318,31 +317,15 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>visual_comp/button_drop_epochs.png</pixmap>
+     <pixmap>visual_comp/button_tfa_1.png</pixmap>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="button_evoked">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>238</y>
-      <width>201</width>
-      <height>47</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>visual_comp/button_imagemap.png</pixmap>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>1110</x>
+      <x>1080</x>
       <y>250</y>
-      <width>181</width>
+      <width>211</width>
       <height>20</height>
      </rect>
     </property>
@@ -361,16 +344,13 @@
      <string notr="true">color: rgb(0, 159, 141);</string>
     </property>
     <property name="text">
-     <string>Time-frequency analysis</string>
-    </property>
-    <property name="pixmap">
-     <pixmap>../../.designer/backup/visual_comp/raw_preprocess_button.png</pixmap>
+     <string>Estimate evoked responses</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="button_choosedataset">
     <property name="geometry">
      <rect>
       <x>55</x>
@@ -439,8 +419,8 @@
      <font>
       <family>Roboto</family>
       <pointsize>20</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">

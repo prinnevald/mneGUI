@@ -1,0 +1,1262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1440</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(17, 29, 38);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <widget class="QLabel" name="logo">
+    <property name="geometry">
+     <rect>
+      <x>55</x>
+      <y>65</y>
+      <width>256</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/dataanal-logo.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="circle_1">
+    <property name="geometry">
+     <rect>
+      <x>56</x>
+      <y>216</y>
+      <width>9</width>
+      <height>9</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/filled_circle.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="circle_2">
+    <property name="geometry">
+     <rect>
+      <x>56</x>
+      <y>269</y>
+      <width>9</width>
+      <height>9</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/blank_circle.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="circle_3">
+    <property name="geometry">
+     <rect>
+      <x>56</x>
+      <y>321</y>
+      <width>15</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/blank_circle.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="circle_4">
+    <property name="geometry">
+     <rect>
+      <x>56</x>
+      <y>425</y>
+      <width>15</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/blank_circle.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="circle_5">
+    <property name="geometry">
+     <rect>
+      <x>56</x>
+      <y>373</y>
+      <width>15</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/blank_circle.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="circle_6">
+    <property name="geometry">
+     <rect>
+      <x>56</x>
+      <y>477</y>
+      <width>15</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/blank_circle.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="circle_7">
+    <property name="geometry">
+     <rect>
+      <x>56</x>
+      <y>529</y>
+      <width>15</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/blank_circle.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="menu_1">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>210</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Raw data</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="menu_2">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>262</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(145, 153, 158);</string>
+    </property>
+    <property name="text">
+     <string>Preprocess</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="menu_3">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>314</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(145, 153, 158);</string>
+    </property>
+    <property name="text">
+     <string>Events</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="menu_4">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>366</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(145, 153, 158);</string>
+    </property>
+    <property name="text">
+     <string>Epoch</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="menu_5">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>418</y>
+      <width>221</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(145, 153, 158);</string>
+    </property>
+    <property name="text">
+     <string>Time-frequency analysis</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="menu_6">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>470</y>
+      <width>221</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(145, 153, 158);</string>
+    </property>
+    <property name="text">
+     <string>Estimate evoked</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="menu_7">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>522</y>
+      <width>221</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(145, 153, 158);</string>
+    </property>
+    <property name="text">
+     <string>Train data</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="button_choosedataset">
+    <property name="geometry">
+     <rect>
+      <x>55</x>
+      <y>695</y>
+      <width>260</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/choose_another_set.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>0</y>
+      <width>971</width>
+      <height>891</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: rgb(76, 51, 15);</string>
+    </property>
+    <property name="currentIndex">
+     <number>2</number>
+    </property>
+    <widget class="QWidget" name="raw">
+     <widget class="QLabel" name="description">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>145</y>
+        <width>847</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>The first step allows to view the information about the raw data in textual and visual format.</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="step">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>72</y>
+        <width>161</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Helvetica Neue</family>
+        <pointsize>25</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>RAW DATA</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>825</x>
+        <y>253</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>visual_comp/arrow.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_text_info">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>236</y>
+        <width>165</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/raw_text_button.png</normaloff>visual_comp/raw_text_button.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>165</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_visualize">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>236</y>
+        <width>165</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/raw_visualize_button.png</normaloff>visual_comp/raw_visualize_button.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>165</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_preprocess">
+      <property name="geometry">
+       <rect>
+        <x>705</x>
+        <y>250</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 230, 204);
+border: none;
+text-align: right</string>
+      </property>
+      <property name="text">
+       <string>Preprocessing</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="preprocess">
+     <widget class="QLabel" name="menu_8">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>72</y>
+        <width>221</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Helvetica Neue</family>
+        <pointsize>25</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>PREPROCESSING</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>145</y>
+        <width>847</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>We preprocess our data to make it more suitable for training and obtaining the best results. Here we clean up our data by performing independent components analysis (ICA). We exclude unneeded parameters and apply the ICA. </string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>825</x>
+        <y>252</y>
+        <width>21</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>visual_comp/arrow.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_preprocess_plot">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>236</y>
+        <width>165</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/button_preprocess1.png</normaloff>visual_comp/button_preprocess1.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>165</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_comparesignals">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>236</y>
+        <width>201</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/button_preprocess2.png</normaloff>visual_comp/button_preprocess2.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>201</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_detectevents">
+      <property name="geometry">
+       <rect>
+        <x>718</x>
+        <y>250</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 230, 204);
+border: none;
+text-align: right</string>
+      </property>
+      <property name="text">
+       <string>Detect events</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="epoch">
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>252</y>
+        <width>16</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>visual_comp/arrow.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="menu_9">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>72</y>
+        <width>221</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Helvetica Neue</family>
+        <pointsize>25</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>EVENTS</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>145</y>
+        <width>847</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>We detect events in order to take relevant segments from the data to reduce learning time. The resulting events array is an ordinary 3-column NumPy array, with sample number in the first column and integer event ID in the last column; the middle column is usually ignored. Press “Plot events” to visualize the distribution of events across the duration of the recording (to make sure event detection worked as expected)</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_findevents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>236</y>
+        <width>165</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/button_findevents.png</normaloff>visual_comp/button_findevents.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>165</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_imagemap_2">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>236</y>
+        <width>201</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/button_plotevents.png</normaloff>visual_comp/button_plotevents.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>201</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_epoch">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>250</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 230, 204);
+border: none;
+text-align: right</string>
+      </property>
+      <property name="text">
+       <string>Epoch</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="events">
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>260</y>
+        <width>60</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>visual_comp/arrow.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="menu_10">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>72</y>
+        <width>221</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Helvetica Neue</family>
+        <pointsize>25</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>EPOCH DATA</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>145</y>
+        <width>847</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>An epoch indicates the number of passes of the entire training dataset the machine learning algorithm has completed. In this step, we reject any epoch where peak-to-peak signal amplitude is beyond reasonable limits for that channel type. “Image map” shows each epoch as one row of an image map, with color representing signal magnitude; the average evoked response and the sensor location.
+</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_dropepochs">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>246</y>
+        <width>165</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/button_drop_epochs.png</normaloff>visual_comp/button_drop_epochs.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>165</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_imagemap">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>246</y>
+        <width>201</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/button_imagemap.png</normaloff>visual_comp/button_imagemap.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>201</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_tfa">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>258</y>
+        <width>181</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 230, 204);
+border: none;</string>
+      </property>
+      <property name="text">
+       <string>Time-frequency analysis</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tfa">
+     <widget class="QLabel" name="description_tfa">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>145</y>
+        <width>847</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Here we compute for the auditory epochs the induced power at different frequencies and times, using Morlet wavelets</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_tfa">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>72</y>
+        <width>461</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Helvetica Neue</family>
+        <pointsize>25</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>TIME-FREQUENCY ANALYSIS</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>252</y>
+        <width>60</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>visual_comp/arrow.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_evoked">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>250</y>
+        <width>201</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 230, 204);
+border: none;</string>
+      </property>
+      <property name="text">
+       <string>Estimate evoked responses</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_tfa1">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>236</y>
+        <width>268</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/button_tfa_1.png</normaloff>visual_comp/button_tfa_1.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>281</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="evoked">
+     <widget class="QLabel" name="description_evoked">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>145</y>
+        <width>847</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Evoked potentials (EPs) are neural responses time-locked to some stimulus. We can get an estimate of evoked responses to auditory versus visual stimuli by averaging together the epochs in each condition. We can plot scalp topographies at  arbitrary times. Evoked objects can also be combined to show contrasts between conditions. A simple difference can be generated by passing weights=[1, -1].
+</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_evoked">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>72</y>
+        <width>401</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Helvetica Neue</family>
+        <pointsize>25</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>ESTIMATE EVOKED RESPONSES</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="arrow_6">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>260</y>
+        <width>60</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>visual_comp/arrow.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_tfa1_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>246</y>
+        <width>268</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/button_evoked1.png</normaloff>visual_comp/button_evoked1.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>281</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_text_info_2">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>246</y>
+        <width>141</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/button_evoked2.png</normaloff>visual_comp/button_evoked2.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>165</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_text_info_3">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>246</y>
+        <width>141</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>visual_comp/button_evoked3.png</normaloff>visual_comp/button_evoked3.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>165</width>
+        <height>47</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_evoked_2">
+      <property name="geometry">
+       <rect>
+        <x>738</x>
+        <y>257</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 230, 204);
+border: none;</string>
+      </property>
+      <property name="text">
+       <string>Train data</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>1450</x>
+      <y>282</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/arrow.png</pixmap>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

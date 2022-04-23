@@ -65,7 +65,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>visual_comp/blank_circle.png</pixmap>
+     <pixmap>visual_comp/filled_circle.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="circle_3">
@@ -81,7 +81,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>visual_comp/blank_circle.png</pixmap>
+     <pixmap>visual_comp/filled_circle.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="circle_4">
@@ -161,8 +161,8 @@
      <font>
       <family>Roboto</family>
       <pointsize>20</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
@@ -190,34 +190,10 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(145, 153, 158);</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Preprocess</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="menu_3">
-    <property name="geometry">
-     <rect>
-      <x>79</x>
-      <y>314</y>
-      <width>161</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Roboto</family>
-      <pointsize>20</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(145, 153, 158);</string>
-    </property>
-    <property name="text">
-     <string>Events</string>
     </property>
    </widget>
    <widget class="QLabel" name="menu_4">
@@ -321,7 +297,7 @@
      <rect>
       <x>470</x>
       <y>72</y>
-      <width>161</width>
+      <width>221</width>
       <height>21</height>
      </rect>
     </property>
@@ -337,7 +313,7 @@
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>RAW DATA</string>
+     <string>EVENTS</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -359,18 +335,21 @@
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>The first step allows to view the information about the raw data in textual and visual format.</string>
+     <string>We detect events in order to take relevant segments from the data to reduce learning time. The resulting events array is an ordinary 3-column NumPy array, with sample number in the first column and integer event ID in the last column; the middle column is usually ignored. Press “Plot events” to visualize the distribution of events across the duration of the recording (to make sure event detection worked as expected)</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
     </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="button_findevents">
     <property name="geometry">
      <rect>
       <x>470</x>
       <y>236</y>
-      <width>160</width>
+      <width>165</width>
       <height>47</height>
      </rect>
     </property>
@@ -378,15 +357,15 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>visual_comp/raw_text_button.png</pixmap>
+     <pixmap>visual_comp/button_findevents.png</pixmap>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="button_plotevents">
     <property name="geometry">
      <rect>
-      <x>655</x>
+      <x>680</x>
       <y>238</y>
-      <width>160</width>
+      <width>201</width>
       <height>47</height>
      </rect>
     </property>
@@ -394,26 +373,40 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>visual_comp/raw_visualize_button.png</pixmap>
+     <pixmap>visual_comp/button_plotevents.png</pixmap>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="button_epoch">
     <property name="geometry">
      <rect>
       <x>1190</x>
       <y>250</y>
-      <width>125</width>
+      <width>101</width>
       <height>19</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
-    <property name="pixmap">
-     <pixmap>visual_comp/raw_preprocess_button.png</pixmap>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 159, 141);</string>
+    </property>
+    <property name="text">
+     <string>Epoch</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="button_choosedataset">
     <property name="geometry">
      <rect>
       <x>55</x>
@@ -429,6 +422,46 @@
      <pixmap>visual_comp/choose_another_set.png</pixmap>
     </property>
    </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>1300</x>
+      <y>252</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>visual_comp/arrow.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>314</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto</family>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Events</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -437,6 +470,14 @@
      <y>0</y>
      <width>1440</width>
      <height>24</height>
+    </rect>
+   </property>
+   <property name="koko" stdset="0">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>0</width>
+     <height>0</height>
     </rect>
    </property>
   </widget>
