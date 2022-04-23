@@ -30,11 +30,10 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-background-color: rgb(76, 51, 15);</string>
+     <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="raw">
      <widget class="QLabel" name="description">
@@ -1233,7 +1232,7 @@ text-align: left</string>
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="btn_menu4_2">
+    <widget class="QPushButton" name="btn_menu5">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -1263,7 +1262,7 @@ text-align: left</string>
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="btn_menu4_3">
+    <widget class="QPushButton" name="btn_menu6">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -1293,7 +1292,7 @@ text-align: left</string>
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="btn_menu4_4">
+    <widget class="QPushButton" name="btn_menu7">
      <property name="geometry">
       <rect>
        <x>80</x>
