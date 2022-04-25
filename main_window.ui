@@ -17,6 +17,12 @@
    <string notr="true">background-color: rgb(17, 29, 38);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>1440</width>
+     <height>900</height>
+    </size>
+   </property>
    <property name="autoFillBackground">
     <bool>false</bool>
    </property>
@@ -26,14 +32,14 @@
       <x>470</x>
       <y>0</y>
       <width>971</width>
-      <height>891</height>
+      <height>801</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="raw">
      <widget class="QLabel" name="description">
@@ -179,6 +185,54 @@ text-align: right</string>
       <property name="text">
        <string>Preprocessing</string>
       </property>
+     </widget>
+     <widget class="QFrame" name="out_raw">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>348</y>
+        <width>874</width>
+        <height>433</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(29, 52, 70);
+border-radius: 40;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="out_console">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>30</y>
+         <width>711</width>
+         <height>381</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Helloo darkness</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="preprocess">
@@ -329,8 +383,28 @@ text-align: right</string>
        <string>Detect events</string>
       </property>
      </widget>
+     <widget class="QFrame" name="out_preprocess">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>348</y>
+        <width>874</width>
+        <height>433</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(29, 52, 70);
+border-radius: 40;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="epoch">
+    <widget class="QWidget" name="events">
      <widget class="QLabel" name="label_9">
       <property name="geometry">
        <rect>
@@ -425,7 +499,7 @@ text-align: right</string>
        </size>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_imagemap_2">
+     <widget class="QPushButton" name="btn_plotevents">
       <property name="geometry">
        <rect>
         <x>210</x>
@@ -478,8 +552,28 @@ text-align: right</string>
        <string>Epoch</string>
       </property>
      </widget>
+     <widget class="QFrame" name="out_events">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>348</y>
+        <width>874</width>
+        <height>433</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(29, 52, 70);
+border-radius: 40;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="events">
+    <widget class="QWidget" name="epoch">
      <widget class="QLabel" name="label_10">
       <property name="geometry">
        <rect>
@@ -627,6 +721,26 @@ border: none;</string>
        <string>Time-frequency analysis</string>
       </property>
      </widget>
+     <widget class="QFrame" name="out_epoch">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>348</y>
+        <width>874</width>
+        <height>433</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(29, 52, 70);
+border-radius: 40;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tfa">
      <widget class="QLabel" name="description_tfa">
@@ -749,6 +863,26 @@ border: none;</string>
        </size>
       </property>
      </widget>
+     <widget class="QFrame" name="out_tfa">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>348</y>
+        <width>874</width>
+        <height>433</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(29, 52, 70);
+border-radius: 40;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="evoked">
      <widget class="QLabel" name="description_evoked">
@@ -820,7 +954,7 @@ border: none;</string>
        <pixmap>visual_comp/arrow.png</pixmap>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_tfa1_2">
+     <widget class="QPushButton" name="btn_evoked1">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -846,7 +980,7 @@ border: none;</string>
        </size>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_text_info_2">
+     <widget class="QPushButton" name="btn_evoked2">
       <property name="geometry">
        <rect>
         <x>300</x>
@@ -872,7 +1006,7 @@ border: none;</string>
        </size>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_text_info_3">
+     <widget class="QPushButton" name="btn_tevoked3">
       <property name="geometry">
        <rect>
         <x>470</x>
@@ -898,7 +1032,7 @@ border: none;</string>
        </size>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_evoked_2">
+     <widget class="QPushButton" name="btn_traindata">
       <property name="geometry">
        <rect>
         <x>738</x>
@@ -924,6 +1058,26 @@ border: none;</string>
        <string>Train data</string>
       </property>
      </widget>
+     <widget class="QFrame" name="out_evoked">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>348</y>
+        <width>874</width>
+        <height>433</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(29, 52, 70);
+border-radius: 40;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QFrame" name="side_menu">
@@ -931,9 +1085,12 @@ border: none;</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>471</width>
+      <width>461</width>
       <height>891</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -1131,9 +1288,15 @@ border-radius: 10px;
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);
+      <string notr="true">QPushButton {color: rgb(255, 255, 255);
 border: none;
-text-align: right</string>
+text-align: right;
+cursor: pointer; 
+}
+
+QPushButton:hover { 
+cursor: pointer; 
+}</string>
      </property>
      <property name="text">
       <string>Raw data</string>
