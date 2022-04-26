@@ -1,5 +1,5 @@
 import sys
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from ui_code import Ui_MainWindow
 
 import matplotlib
@@ -17,8 +17,12 @@ import io
 # run this for converting ui to py
 # pyuic5 main_window.ui -o ui_code.py
 
-class MplCanvas(FigureCanvasQTAgg):
+MY_DPI = 192
 
+def pos_by_pixel(num):
+    return num/MY_DPI
+
+class MplCanvas( FigureCanvasQTAgg):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
         self.axes = fig.add_subplot(111)
@@ -34,7 +38,11 @@ class MainWindow:
 
         # PAGES
         # Set main widget
-        self.ui.stackedWidget.setCurrentWidget(self.ui.raw)
+        self.ui.stackedWelcome.setCurrentWidget(self.ui.welcome)
+        self.ui.stackedMain.setCurrentWidget(self.ui.raw)
+
+        self.ui.btn_upload.clicked.connect(self.upload_dataset)
+        self.ui.btn_sample.clicked.connect(self.select_dataset)
 
         # Set links for buttons on side menu
         self.ui.btn_menu1.clicked.connect(self.show_raw_page)
@@ -43,6 +51,7 @@ class MainWindow:
         self.ui.btn_menu4.clicked.connect(self.show_epochs_page)
         self.ui.btn_menu5.clicked.connect(self.show_tfa_page)
         self.ui.btn_menu6.clicked.connect(self.show_evoked_page)
+        self.ui.btn_choosedataset.clicked.connect(self.to_welcome)
 
         # Set links for buttons on main pages
         self.ui.btn_preprocess.clicked.connect(self.show_preprocess_page)
@@ -51,19 +60,11 @@ class MainWindow:
         self.ui.btn_tfa.clicked.connect(self.show_tfa_page)
         self.ui.btn_evoked.clicked.connect(self.show_evoked_page)
 
-        # Load data
-        sample_data_folder = mne.datasets.sample.data_path()
-        self.sample_data_folder = sample_data_folder
-        sample_data_raw_file = os.path.join(sample_data_folder, 'MEG', 'sample',
-                                            'sample_audvis_filt-0-40_raw.fif')
-        raw = mne.io.read_raw_fif(sample_data_raw_file)
-        self.raw_data = raw
-
         # BUTTONS connect
         self.ui.btn_text_info.clicked.connect(self.print_data)
         self.ui.btn_visualize.clicked.connect(self.raw_visualize)
         self.ui.btn_preprocess_plot.clicked.connect(self.preprocess_plot)
-        self.ui.btn_comparesignals.clicked.connect(self.compare_signals)
+        self.ui.btn_comparesignals.clicked.connect(self.preprocess_compare_signals)
         self.ui.btn_findevents.clicked.connect(self.events_find)
         self.ui.btn_plotevents.clicked.connect(self.events_plot)
         self.ui.btn_dropepochs.clicked.connect(self.epoch_pool)
@@ -73,31 +74,49 @@ class MainWindow:
         self.ui.btn_evoked2.clicked.connect(self.evoked_detailed_plot)
         self.ui.btn_evoked1.clicked.connect(self.evoked_difference_wave)
 
+    # UPLOAD dataset
 
-
-
+    def upload_dataset(self):
+        # returns a tuple (fname, ".ext")
+        # throw exception if file was not chosen
+        fname = QtWidgets.QFileDialog.getOpenFileName(self.main_win, "Open File", "", "All Files (*);; Sample (*.fif)")
+        # only fif for now // works
+        raw = mne.io.read_raw_fif(fname[0])
+        self.raw_data = raw
+        self.to_main()
+        
+    def select_dataset(self):
+        # if fif
+        if (self.ui.combo_box.currentIndex() == 0):
+            print ("here bitch")
+            sample_data_folder = mne.datasets.sample.data_path()
+            self.sample_data_folder = sample_data_folder
+            sample_data_raw_file = os.path.join(sample_data_folder, 'MEG', 'sample',
+                                                'sample_audvis_filt-0-40_raw.fif')
+            raw = mne.io.read_raw_fif(sample_data_raw_file)
+            self.raw_data = raw
+            self.to_main()
 
     # NAVIGATION
     def show(self):
         self.main_win.show()
-    
+    def to_main(self):
+        self.ui.stackedWelcome.setCurrentWidget(self.ui.main)
+        self.show_raw_page()
+    def to_welcome(self):
+        self.ui.stackedWelcome.setCurrentWidget(self.ui.welcome)
     def show_raw_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.raw)
-
+        self.ui.stackedMain.setCurrentWidget(self.ui.raw)
     def show_preprocess_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.preprocess)
-    
+        self.ui.stackedMain.setCurrentWidget(self.ui.preprocess)
     def show_events_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.events)
-
+        self.ui.stackedMain.setCurrentWidget(self.ui.events)
     def show_epochs_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.epoch)
-
+        self.ui.stackedMain.setCurrentWidget(self.ui.epoch)
     def show_tfa_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.tfa)
-
+        self.ui.stackedMain.setCurrentWidget(self.ui.tfa)
     def show_evoked_page(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.evoked)
+        self.ui.stackedMain.setCurrentWidget(self.ui.evoked)
 
     # RAW functions
 
@@ -108,6 +127,11 @@ class MainWindow:
     def raw_visualize(self):
         self.ui.out_console.hide()
         data = self.raw_data.get_data()
+        pos = QtCore.QPoint(pos_by_pixel(67), pos_by_pixel(439))
+        raw_plot = MplCanvas(self, width=pos_by_pixel(363), height=pos_by_pixel(300), dpi=MY_DPI)
+        raw_plot.move(pos)
+        raw_plot.axes.plot(data)
+        raw_plot.show()
 
     # PREPROCESS functions
 
