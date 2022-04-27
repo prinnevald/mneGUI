@@ -63,6 +63,7 @@ class MainWindow:
         self.ui.btn_menu4.clicked.connect(self.show_epochs_page)
         self.ui.btn_menu5.clicked.connect(self.show_tfa_page)
         self.ui.btn_menu6.clicked.connect(self.show_evoked_page)
+        self.ui.btn_menu7.clicked.connect(self.show_classification_page)
         self.ui.btn_choosedataset.clicked.connect(self.to_welcome)
 
         # Set links for buttons on main pages
@@ -71,6 +72,7 @@ class MainWindow:
         self.ui.btn_epoch.clicked.connect(self.show_epochs_page)
         self.ui.btn_tfa.clicked.connect(self.show_tfa_page)
         self.ui.btn_evoked.clicked.connect(self.show_evoked_page)
+        self.ui.btn_traindata.clicked.connect(self.show_classification_page)
 
         # BUTTONS connect
         self.ui.btn_text_info.clicked.connect(self.print_data)
@@ -153,6 +155,8 @@ class MainWindow:
         self.ui.stackedMain.setCurrentWidget(self.ui.tfa)
     def show_evoked_page(self):
         self.ui.stackedMain.setCurrentWidget(self.ui.evoked)
+    def show_classification_page(self):
+        self.ui.stackedMain.setCurrentWidget(self.ui.classification)
 
     # RAW functions
 
