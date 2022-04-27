@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtWidgets, QtCore
-from ui_code import Ui_MainWindow
+from ui_code2 import Ui_MainWindow
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -9,11 +9,28 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 matplotlib.use('Qt5Agg')
 from matplotlib.figure import Figure
 
+import contextlib
+
 import os
 import numpy as np
 import mne
-import threading
-import io
+
+from sklearn.svm import SVC
+
+import sys
+
+import data_loading
+import linear
+import cnn
+import rnn
+
+import numpy as np
+from sklearn import preprocessing
+
+from sklearn.model_selection import train_test_split, ShuffleSplit
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+from param import Param
 
 # run this for converting ui to py
 # pyuic5 main_window.ui -o ui_code.py
@@ -69,6 +86,10 @@ class MainWindow:
         self.ui.btn_evoked1.clicked.connect(self.evoked_compare)
         self.ui.btn_evoked2.clicked.connect(self.evoked_detailed_plot)
         self.ui.btn_evoked1.clicked.connect(self.evoked_difference_wave)
+        self.ui.btn_cnn.clicked.connect(self.choose_cnn)
+        self.ui.btn_rnn.clicked.connect(self.choose_rnn)
+        self.ui.btn_lda.clicked.connect(self.choose_lda)
+        self.ui.btn_svm.clicked.connect(self.choose_svm)
 
     # plot graphs driver
     # def plot_graph(self, figure):
@@ -156,9 +177,14 @@ class MainWindow:
    
     # PREPROCESS functions
     def preprocess_plot(self):
-        ica = mne.preprocessing.ICA(n_components=20, random_state=97, max_iter=800)
+        n_components = int(self.ui.input_number_components.text())
+        random_state = int(self.ui.input_random_state.text())
+        max_iter = int(self.ui.input_max_iter.text())
+        ica = mne.preprocessing.ICA(n_components=n_components, random_state=random_state, max_iter=max_iter)
         ica.fit(self.raw_data)
-        ica.exclude = [1, 2]
+        to_exclude = self.ui.input_exclude.text().split(", ")
+        to_exclude = list(map(int, to_exclude))
+        ica.exclude = to_exclude
         self.ui.figure = ica.plot_properties(self.raw_data, picks=ica.exclude)
         # self.plot_graph(self.ui.figure)
         self.ica = ica
@@ -169,7 +195,8 @@ class MainWindow:
         self.ica.apply(self.raw_data)
 
         # show some frontal channels to clearly illustrate the artifact removal
-        chs = ['MEG 0111', 'MEG 0121', 'MEG 0131', 'MEG 0211', 'MEG 0221', 'MEG 0231',
+        chs = self.ui.input_channels.toPlainText().split(", ")
+        channels = ['MEG 0111', 'MEG 0121', 'MEG 0131', 'MEG 0211', 'MEG 0221', 'MEG 0231',
                 'MEG 0311', 'MEG 0321', 'MEG 0331', 'MEG 1511', 'MEG 1521', 'MEG 1531',
                 'EEG 001', 'EEG 002', 'EEG 003', 'EEG 004', 'EEG 005', 'EEG 006',
                 'EEG 007', 'EEG 008']
@@ -182,30 +209,27 @@ class MainWindow:
     def events_find(self):
         # REPLACE PRINTS
         events = mne.find_events(self.raw_data, stim_channel='STI 014')
-        print(events[:5])  # show the first 5
+        self.ui.out_console_events.setText(str(events[:5])) 
         self.events = events
-        print(events)
 
     def events_plot(self):
         events = self.events
         raw = self.raw_data
-        event_dict = {'auditory/left': 1, 'auditory/right': 2, 'visual/left': 3,
-                'visual/right': 4, 'smiley': 5, 'buttonpress': 32}
-        self.event_dict = event_dict
-        fig = mne.viz.plot_events(events, event_id=event_dict, sfreq=raw.info['sfreq'],
+        self.event_dict = {'auditory/left': 1, 'auditory/right': 2, 'visual/left': 3,
+              'visual/right': 4, 'smiley': 5, 'buttonpress': 32}
+        fig = mne.viz.plot_events(events, event_id=self.event_dict, sfreq=raw.info['sfreq'],
                             first_samp=raw.first_samp)
-
+        
     # EPOCH functions
 
     def epoch_pool(self):
         events = self.events
         raw = self.raw_data
-        event_dict = self.event_dict
         reject_criteria = dict(mag=4000e-15,     # 4000 fT
                         grad=4000e-13,    # 4000 fT/cm
                         eeg=150e-6,       # 150 µV
                         eog=250e-6)       # 250 µV
-        epochs = mne.Epochs(raw, events, event_id=event_dict, tmin=-0.2, tmax=0.5,
+        epochs = mne.Epochs(raw, events, event_id=self.event_dict, tmin=-0.2, tmax=0.5,
                         reject=reject_criteria, preload=True)
             # logs here
         conds_we_care_about = ['auditory/left', 'auditory/right',
@@ -249,6 +273,142 @@ class MainWindow:
         evoked_diff.pick_types(meg='mag').plot_topo(color='r', legend=False)
     
     # ML functions
+
+    def windowed_means(out_features, param):
+        """
+        Windowed means features extraction method
+        :param out_features: epoched data in 3D shape (epochs_count x channels_count x values_count)
+        :param param: configuration object
+        :return: 2D vector with calculated features (epochs_count x features_count)
+        """
+        sampling_fq = param.t_max * 1000 + 1
+        temp_wnd = np.linspace(param.min_latency, param.max_latency, param.steps + 1)
+        intervals = np.zeros((param.steps, 2))
+        for i in range(0, temp_wnd.shape[0] - 1):
+            intervals[i, 0] = temp_wnd[i]
+            intervals[i, 1] = temp_wnd[i + 1]
+        intervals = intervals - param.t_min
+        output_features = []
+        for i in range(out_features.shape[0]):
+            feature = []
+            for j in range(out_features.shape[1]):
+                time_course = out_features[i][j]
+                for k in range(intervals.shape[0]):
+                    borders = intervals[k] * sampling_fq
+                    feature.append(np.average(time_course[int(borders[0] - 1):int(borders[1] - 1)]))
+            output_features.append(feature)
+        out = preprocessing.scale(np.array(output_features), axis=1)
+        return out
+
+
+    def print_help():
+        print("Usage: python main.py <classifier>\n")
+        print("You can choose from these classifiers: lda, svm, cnn, rnn\n")
+
+
+    def call_ml(cl):
+        """
+        The program is executable from the command line using this file with one argument represents the choice of classifier. 
+        The command has the following form:
+
+        python main.py <classifier>
+
+        The user can choose from 4 types of classifiers, so the possible variants of the command are:
+
+        python main.py lda
+        python main.py svm
+        python main.py cnn
+        python main.py rnn
+
+        All other parameters are configurable in the param.py file.
+        """
+
+        #if len(sys.argv) != 2:
+        #    print("The wrong number of command line arguments!\n")
+        #    print_help()
+        #    exit(1)
+
+        classifier = cl
+
+        if classifier != 'cnn' and classifier != 'rnn' and classifier != 'lda' and classifier != 'svm':
+            print("The wrong choice of classifier!\n")
+            print_help()
+            exit(1)
+
+        param = Param()
+
+        X, Y = data_loading.read_data(param)
+
+        if classifier == 'cnn':
+            X = np.expand_dims(X, 3)
+        elif classifier == 'lda' or classifier == 'svm':
+            X = windowed_means(X, param)
+
+        x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=param.test_part,
+                                                            random_state=0, shuffle=True)
+
+        val = round(param.validation_part * x_train.shape[0])
+
+        shuffle_split = ShuffleSplit(n_splits=param.cross_val_iter, test_size=val, random_state=0)
+        val_results = []
+        test_results = []
+        iter_counter = 0
+
+        # Monte-carlo cross-validation
+        for train, validation in shuffle_split.split(x_train):
+            iter_counter = iter_counter + 1
+            print(iter_counter, "/", param.cross_val_iter, " cross-validation iteration")
+
+            if classifier == 'cnn':
+                model = cnn.CNN(x_train.shape[1], x_train.shape[2], param)
+            elif classifier == 'rnn':
+                model = rnn.RNN(x_train.shape[1], x_train.shape[2], param)
+            elif classifier == 'lda':
+                model = linear.LinearClassifier(LinearDiscriminantAnalysis(solver='eigen', shrinkage='auto'))
+            else:
+                model = linear.LinearClassifier(SVC(cache_size=500))
+
+            validation_metrics = model.fit(x_train[train], y_train[train], x_train[validation], y_train[validation])
+            val_results.append(validation_metrics)
+
+            test_metrics = model.evaluate(x_test, y_test)
+            test_results.append(test_metrics)
+
+        print("\nClassifier: ", classifier)
+
+        avg_val_results = np.round(np.mean(val_results, axis=0) * 100, 2)
+        avg_val_results_std = np.round(np.std(val_results, axis=0) * 100, 2)
+
+        print("Averaged validation results with averaged std in brackets:")
+        print("AUC: ", avg_val_results[0], "(", avg_val_results_std[0], ")")
+        print("accuracy: ", avg_val_results[1], "(", avg_val_results_std[1], ")")
+        print("precision: ", avg_val_results[2], "(", avg_val_results_std[2], ")")
+        print("recall: ", avg_val_results[3], "(", avg_val_results_std[3], ")")
+
+        print("\n##############################\n")
+
+        avg_test_results = np.round(np.mean(test_results, axis=0) * 100, 2)
+        avg_test_results_std = np.round(np.std(test_results, axis=0) * 100, 2)
+
+        print("Averaged test results with averaged std in brackets: ")
+        print("AUC: ", avg_test_results[0], "(", avg_test_results_std[0], ")")
+        print("accuracy: ", avg_test_results[1], "(", avg_test_results_std[1], ")")
+        print("precision: ", avg_test_results[2], "(", avg_test_results_std[2], ")")
+        print("recall: ", avg_test_results[3], "(", avg_test_results_std[3], ")")
+
+
+    def choose_lda():
+        call_ml('lda')
+
+    def choose_svm():
+        call_ml('svm')
+
+    def choose_cnn():
+        call_ml('cnn')
+
+    def choose_rnn():
+        call_ml('rnn')
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

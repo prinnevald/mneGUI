@@ -251,7 +251,7 @@ border-radius: 6px;</string>
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="raw">
        <widget class="QLabel" name="description">
@@ -420,39 +420,30 @@ border-radius: 40;</string>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QWidget" name="verticalLayoutWidget">
+        <widget class="QLabel" name="out_console">
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>20</y>
-           <width>801</width>
-           <height>391</height>
+           <y>40</y>
+           <width>621</width>
+           <height>321</height>
           </rect>
          </property>
-         <layout class="QVBoxLayout" name="layout">
-          <item>
-           <widget class="QLabel" name="out_console">
-            <property name="font">
-             <font>
-              <family>Roboto</family>
-              <pointsize>14</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>Helloo darkness</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <property name="font">
+          <font>
+           <family>Roboto</family>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Output</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
         </widget>
        </widget>
        <widget class="QPushButton" name="btn_plot_pds">
@@ -535,7 +526,7 @@ font-weight: regular;
          <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
-         <string>We preprocess our data to make it more suitable for training and obtaining the best results. Here we clean up our data by performing independent components analysis (ICA). We exclude unneeded parameters and apply the ICA. </string>
+         <string>We preprocess our data to make it more suitable for training and obtaining the best results. Here we clean up our data by performing independent components analysis (ICA). ICA takes 3 parameters to fit the data. We exclude unneeded parameters and apply the ICA. By pressing &quot;Compare signals&quot; we can compare raw data and data after ICA </string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -564,7 +555,7 @@ font-weight: regular;
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>236</y>
+          <y>350</y>
           <width>165</width>
           <height>47</height>
          </rect>
@@ -589,8 +580,8 @@ font-weight: regular;
        <widget class="QPushButton" name="btn_comparesignals">
         <property name="geometry">
          <rect>
-          <x>210</x>
-          <y>236</y>
+          <x>0</x>
+          <y>540</y>
           <width>201</width>
           <height>47</height>
          </rect>
@@ -643,9 +634,9 @@ text-align: right</string>
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>348</y>
+          <y>610</y>
           <width>874</width>
-          <height>433</height>
+          <height>171</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -657,6 +648,98 @@ border-radius: 40;</string>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="input_number_components">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>250</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white;
+border-radius: 5;</string>
+        </property>
+        <property name="placeholderText">
+         <string>number of components</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="input_random_state">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>250</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white;
+border-radius: 5;</string>
+        </property>
+        <property name="placeholderText">
+         <string>random state</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="input_max_iter">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>250</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white;
+border-radius: 5;</string>
+        </property>
+        <property name="placeholderText">
+         <string>maximum iterations</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="input_exclude">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>300</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white;
+border-radius: 5;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>parameters to exclude</string>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="input_channels">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>410</y>
+          <width>461</width>
+          <height>111</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white;
+border-radius: 5;</string>
+        </property>
+        <property name="html">
+         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:18px; background-color:#1e1e1e;&quot;&gt;&lt;span style=&quot; font-family:'Menlo,Monaco,Courier New,monospace'; font-size:12px; color:#ffffff;&quot;&gt;MEG 0111, MEG 0121, MEG 0131, MEG 0211, MEG 0221, MEG 0231, MEG 0311, MEG 0321, MEG 0331, MEG 1511, MEG 1521, MEG 1531, EEG 001, EEG 002, EEG 003, EEG 004, EEG 005, EEG 006, EEG 007, EEG 008&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </widget>
@@ -827,6 +910,31 @@ border-radius: 40;</string>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
+        <widget class="QLabel" name="out_console_events">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>40</y>
+           <width>621</width>
+           <height>321</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Roboto</family>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Output</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="epoch">
@@ -1335,6 +1443,245 @@ border-radius: 40;</string>
         </property>
        </widget>
       </widget>
+      <widget class="QWidget" name="classification">
+       <widget class="QLabel" name="description_ml">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>140</y>
+          <width>847</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Roboto</family>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>This step includes 4 state-of-the-art machine learning algorithms in order to solve an EEG/MEG classification problem. 250 subjects were asked to focus on a number from 1 to 9, and their brain data across 3 channels was captured. Using this brain data, an ML model learns and makes predictions. </string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QFrame" name="out_classification">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>343</y>
+          <width>874</width>
+          <height>433</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(29, 52, 70);
+border-radius: 40;</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QLabel" name="out_ml_logs">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>40</y>
+           <width>781</width>
+           <height>361</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Roboto</family>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Output</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QLabel" name="label_classification">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>67</y>
+          <width>221</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Helvetica Neue</family>
+          <pointsize>25</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>CLASSIFICATION</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_lda">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>240</y>
+          <width>181</width>
+          <height>47</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Roboto</family>
+          <pointsize>16</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+background-color: #45AA9E;
+border-radius: 10px;
+color: white;
+font-weight: regular;
+}</string>
+        </property>
+        <property name="text">
+         <string>LDA</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>281</width>
+          <height>47</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_svm">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>240</y>
+          <width>181</width>
+          <height>47</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Roboto</family>
+          <pointsize>16</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+background-color: #45AA9E;
+border-radius: 10px;
+color: white;
+font-weight: regular;
+}</string>
+        </property>
+        <property name="text">
+         <string>SVM</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>281</width>
+          <height>47</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_cnn">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>240</y>
+          <width>181</width>
+          <height>47</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Roboto</family>
+          <pointsize>16</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+background-color: #45AA9E;
+border-radius: 10px;
+color: white;
+font-weight: regular;
+}</string>
+        </property>
+        <property name="text">
+         <string>CNN</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>281</width>
+          <height>47</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_rnn">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>240</y>
+          <width>181</width>
+          <height>47</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Roboto</family>
+          <pointsize>16</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+background-color: #45AA9E;
+border-radius: 10px;
+color: white;
+font-weight: regular;
+}</string>
+        </property>
+        <property name="text">
+         <string>RNN</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>281</width>
+          <height>47</height>
+         </size>
+        </property>
+       </widget>
+      </widget>
      </widget>
      <widget class="QFrame" name="side_menu">
       <property name="geometry">
@@ -1735,7 +2082,7 @@ border: none;
 text-align: left</string>
        </property>
        <property name="text">
-        <string>Train data</string>
+        <string>Classification</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
