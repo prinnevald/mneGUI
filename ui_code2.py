@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'mainwindow.ui'
+# Form implementation generated from reading ui file 'app.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -9,8 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QCursor
-
 
 
 class Ui_MainWindow(object):
@@ -70,8 +68,6 @@ class Ui_MainWindow(object):
 "background-color: #45AA9E;\n"
 "border-radius: 12px;")
         self.btn_upload.setObjectName("btn_upload")
-        # here
-        self.btn_upload.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.note = QtWidgets.QLabel(self.welcome_win)
         self.note.setGeometry(QtCore.QRect(100, 390, 261, 20))
         self.note.setStyleSheet("color: white;\n"
@@ -101,7 +97,6 @@ class Ui_MainWindow(object):
 "background-color: #45AA9E;\n"
 "border-radius: 6px;")
         self.btn_sample.setObjectName("btn_sample")
-        self.btn_sample.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.logo = QtWidgets.QLabel(self.welcome_win)
         self.logo.setGeometry(QtCore.QRect(90, 60, 271, 71))
         self.logo.setStyleSheet("background-color: none;")
@@ -125,6 +120,7 @@ class Ui_MainWindow(object):
         self.description.setFont(font)
         self.description.setStyleSheet("color: rgb(255, 255, 255);")
         self.description.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.description.setWordWrap(True)
         self.description.setObjectName("description")
         self.step = QtWidgets.QLabel(self.raw)
         self.step.setGeometry(QtCore.QRect(0, 72, 161, 21))
@@ -145,7 +141,6 @@ class Ui_MainWindow(object):
         self.btn_text_info.setGeometry(QtCore.QRect(0, 236, 165, 47))
         self.btn_text_info.setStyleSheet("border: none")
         self.btn_text_info.setText("")
-        self.btn_text_info.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("visual_comp/raw_text_button.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_text_info.setIcon(icon)
@@ -155,7 +150,6 @@ class Ui_MainWindow(object):
         self.btn_visualize.setGeometry(QtCore.QRect(200, 236, 165, 47))
         self.btn_visualize.setStyleSheet("border: none")
         self.btn_visualize.setText("")
-        self.btn_visualize.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("visual_comp/raw_visualize_button.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_visualize.setIcon(icon1)
@@ -163,7 +157,6 @@ class Ui_MainWindow(object):
         self.btn_visualize.setObjectName("btn_visualize")
         self.btn_preprocess = QtWidgets.QPushButton(self.raw)
         self.btn_preprocess.setGeometry(QtCore.QRect(705, 250, 111, 21))
-        self.btn_preprocess.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         font = QtGui.QFont()
         font.setFamily("Roboto")
         font.setPointSize(16)
@@ -182,8 +175,13 @@ class Ui_MainWindow(object):
         self.out_raw.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.out_raw.setFrameShadow(QtWidgets.QFrame.Raised)
         self.out_raw.setObjectName("out_raw")
-        self.out_console = QtWidgets.QLabel(self.out_raw)
-        self.out_console.setGeometry(QtCore.QRect(40, 30, 711, 381))
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.out_raw)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(40, 20, 801, 391))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.layout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.layout.setContentsMargins(0, 0, 0, 0)
+        self.layout.setObjectName("layout")
+        self.out_console = QtWidgets.QLabel(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setFamily("Roboto")
         font.setPointSize(14)
@@ -192,12 +190,7 @@ class Ui_MainWindow(object):
         self.out_console.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.out_console.setWordWrap(True)
         self.out_console.setObjectName("out_console")
-        # self.verticalLayoutWidget = QtWidgets.QWidget(self.out_raw)
-        # self.verticalLayoutWidget.setGeometry(QtCore.QRect(30, 20, 400, 391))
-        # self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        # self.layout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        # self.layout.setContentsMargins(0, 0, 0, 0)
-        # self.layout.setObjectName("layout")
+        self.layout.addWidget(self.out_console)
         self.btn_plot_pds = QtWidgets.QPushButton(self.raw)
         self.btn_plot_pds.setGeometry(QtCore.QRect(400, 236, 181, 47))
         font = QtGui.QFont()
@@ -214,7 +207,6 @@ class Ui_MainWindow(object):
 "}")
         self.btn_plot_pds.setIconSize(QtCore.QSize(281, 47))
         self.btn_plot_pds.setObjectName("btn_plot_pds")
-        self.btn_plot_pds.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.stackedMain.addWidget(self.raw)
         self.preprocess = QtWidgets.QWidget()
         self.preprocess.setObjectName("preprocess")
@@ -252,12 +244,10 @@ class Ui_MainWindow(object):
         self.btn_preprocess_plot.setIcon(icon2)
         self.btn_preprocess_plot.setIconSize(QtCore.QSize(165, 47))
         self.btn_preprocess_plot.setObjectName("btn_preprocess_plot")
-        self.btn_preprocess_plot.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_comparesignals = QtWidgets.QPushButton(self.preprocess)
         self.btn_comparesignals.setGeometry(QtCore.QRect(210, 236, 201, 47))
         self.btn_comparesignals.setStyleSheet("border: none")
         self.btn_comparesignals.setText("")
-        self.btn_comparesignals.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("visual_comp/button_preprocess2.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_comparesignals.setIcon(icon3)
@@ -276,7 +266,6 @@ class Ui_MainWindow(object):
 "border: none;\n"
 "text-align: right")
         self.btn_detectevents.setObjectName("btn_detectevents")
-        self.btn_detectevents.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.out_preprocess = QtWidgets.QFrame(self.preprocess)
         self.out_preprocess.setGeometry(QtCore.QRect(0, 348, 874, 433))
         self.out_preprocess.setStyleSheet("background-color: rgb(29, 52, 70);\n"
@@ -321,7 +310,6 @@ class Ui_MainWindow(object):
         self.btn_findevents.setIcon(icon4)
         self.btn_findevents.setIconSize(QtCore.QSize(165, 47))
         self.btn_findevents.setObjectName("btn_findevents")
-        self.btn_findevents.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_plotevents = QtWidgets.QPushButton(self.events)
         self.btn_plotevents.setGeometry(QtCore.QRect(210, 236, 201, 47))
         self.btn_plotevents.setStyleSheet("border: none")
@@ -331,7 +319,6 @@ class Ui_MainWindow(object):
         self.btn_plotevents.setIcon(icon5)
         self.btn_plotevents.setIconSize(QtCore.QSize(201, 47))
         self.btn_plotevents.setObjectName("btn_plotevents")
-        self.btn_plotevents.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_epoch = QtWidgets.QPushButton(self.events)
         self.btn_epoch.setGeometry(QtCore.QRect(770, 250, 51, 21))
         font = QtGui.QFont()
@@ -345,7 +332,6 @@ class Ui_MainWindow(object):
 "border: none;\n"
 "text-align: right")
         self.btn_epoch.setObjectName("btn_epoch")
-        self.btn_epoch.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.out_events = QtWidgets.QFrame(self.events)
         self.out_events.setGeometry(QtCore.QRect(0, 348, 874, 433))
         self.out_events.setStyleSheet("background-color: rgb(29, 52, 70);\n"
@@ -390,7 +376,6 @@ class Ui_MainWindow(object):
         self.btn_dropepochs.setIcon(icon6)
         self.btn_dropepochs.setIconSize(QtCore.QSize(165, 47))
         self.btn_dropepochs.setObjectName("btn_dropepochs")
-        self.btn_dropepochs.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_imagemap = QtWidgets.QPushButton(self.epoch)
         self.btn_imagemap.setGeometry(QtCore.QRect(210, 246, 201, 47))
         self.btn_imagemap.setStyleSheet("border: none")
@@ -400,7 +385,6 @@ class Ui_MainWindow(object):
         self.btn_imagemap.setIcon(icon7)
         self.btn_imagemap.setIconSize(QtCore.QSize(201, 47))
         self.btn_imagemap.setObjectName("btn_imagemap")
-        self.btn_imagemap.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_tfa = QtWidgets.QPushButton(self.epoch)
         self.btn_tfa.setGeometry(QtCore.QRect(640, 258, 181, 21))
         font = QtGui.QFont()
@@ -413,7 +397,6 @@ class Ui_MainWindow(object):
         self.btn_tfa.setStyleSheet("color: rgb(0, 230, 204);\n"
 "border: none;")
         self.btn_tfa.setObjectName("btn_tfa")
-        self.btn_tfa.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.out_epoch = QtWidgets.QFrame(self.epoch)
         self.out_epoch.setGeometry(QtCore.QRect(0, 348, 874, 433))
         self.out_epoch.setStyleSheet("background-color: rgb(29, 52, 70);\n"
@@ -461,7 +444,6 @@ class Ui_MainWindow(object):
         self.btn_evoked.setStyleSheet("color: rgb(0, 230, 204);\n"
 "border: none;")
         self.btn_evoked.setObjectName("btn_evoked")
-        self.btn_evoked.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_tfa1 = QtWidgets.QPushButton(self.tfa)
         self.btn_tfa1.setGeometry(QtCore.QRect(0, 236, 268, 47))
         self.btn_tfa1.setStyleSheet("border: none")
@@ -471,7 +453,6 @@ class Ui_MainWindow(object):
         self.btn_tfa1.setIcon(icon8)
         self.btn_tfa1.setIconSize(QtCore.QSize(281, 47))
         self.btn_tfa1.setObjectName("btn_tfa1")
-        self.btn_tfa1.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.out_tfa = QtWidgets.QFrame(self.tfa)
         self.out_tfa.setGeometry(QtCore.QRect(0, 348, 874, 433))
         self.out_tfa.setStyleSheet("background-color: rgb(29, 52, 70);\n"
@@ -516,7 +497,6 @@ class Ui_MainWindow(object):
         self.btn_evoked1.setIcon(icon9)
         self.btn_evoked1.setIconSize(QtCore.QSize(281, 47))
         self.btn_evoked1.setObjectName("btn_evoked1")
-        self.btn_evoked1.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_evoked2 = QtWidgets.QPushButton(self.evoked)
         self.btn_evoked2.setGeometry(QtCore.QRect(300, 246, 141, 47))
         self.btn_evoked2.setStyleSheet("border: none")
@@ -526,7 +506,6 @@ class Ui_MainWindow(object):
         self.btn_evoked2.setIcon(icon10)
         self.btn_evoked2.setIconSize(QtCore.QSize(165, 47))
         self.btn_evoked2.setObjectName("btn_evoked2")
-        self.btn_evoked2.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_tevoked3 = QtWidgets.QPushButton(self.evoked)
         self.btn_tevoked3.setGeometry(QtCore.QRect(470, 246, 141, 47))
         self.btn_tevoked3.setStyleSheet("border: none")
@@ -536,7 +515,6 @@ class Ui_MainWindow(object):
         self.btn_tevoked3.setIcon(icon11)
         self.btn_tevoked3.setIconSize(QtCore.QSize(165, 47))
         self.btn_tevoked3.setObjectName("btn_tevoked3")
-        self.btn_tevoked3.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_traindata = QtWidgets.QPushButton(self.evoked)
         self.btn_traindata.setGeometry(QtCore.QRect(738, 257, 91, 21))
         font = QtGui.QFont()
@@ -549,7 +527,6 @@ class Ui_MainWindow(object):
         self.btn_traindata.setStyleSheet("color: rgb(0, 230, 204);\n"
 "border: none;")
         self.btn_traindata.setObjectName("btn_traindata")
-        # self.btn_traindata.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.out_evoked = QtWidgets.QFrame(self.evoked)
         self.out_evoked.setGeometry(QtCore.QRect(0, 348, 874, 433))
         self.out_evoked.setStyleSheet("background-color: rgb(29, 52, 70);\n"
@@ -606,12 +583,11 @@ class Ui_MainWindow(object):
         self.circle_7.setObjectName("circle_7")
         self.btn_choosedataset = QtWidgets.QPushButton(self.side_menu)
         self.btn_choosedataset.setGeometry(QtCore.QRect(60, 670, 241, 47))
-        self.btn_choosedataset.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         font = QtGui.QFont()
         font.setFamily("Roboto")
         font.setPointSize(16)
         font.setBold(True)
-        font.setWeight(50)
+        font.setWeight(75)
         self.btn_choosedataset.setFont(font)
         self.btn_choosedataset.setStyleSheet("QPushButton {\n"
 "border: 2px solid ;\n"
@@ -631,79 +607,113 @@ class Ui_MainWindow(object):
         self.btn_choosedataset.setObjectName("btn_choosedataset")
         self.btn_menu1 = QtWidgets.QPushButton(self.side_menu)
         self.btn_menu1.setGeometry(QtCore.QRect(70, 205, 91, 21))
-        self.btn_menu1.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         font = QtGui.QFont()
         font.setFamily("Roboto")
         font.setPointSize(20)
-        font.setBold(False)
+        font.setBold(True)
         font.setItalic(False)
         font.setWeight(75)
         self.btn_menu1.setFont(font)
         self.btn_menu1.setStyleSheet("QPushButton {color: rgb(255, 255, 255);\n"
 "border: none;\n"
 "text-align: right;\n"
+"cursor: pointer; \n"
+"}\n"
+"\n"
+"QPushButton:hover { \n"
+"cursor: pointer; \n"
 "}")
         self.btn_menu1.setCheckable(False)
         self.btn_menu1.setObjectName("btn_menu1")
         self.btn_menu2 = QtWidgets.QPushButton(self.side_menu)
         self.btn_menu2.setGeometry(QtCore.QRect(80, 258, 111, 21))
+        font = QtGui.QFont()
+        font.setFamily("Roboto")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.btn_menu2.setFont(font)
-        self.btn_menu2.setStyleSheet("color:  rgb(255, 255, 255);\n"
+        self.btn_menu2.setStyleSheet("color: rgb(125, 135, 141);\n"
 "border: none;\n"
 "text-align: left")
         self.btn_menu2.setCheckable(False)
         self.btn_menu2.setObjectName("btn_menu2")
-        self.btn_menu2.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_menu3 = QtWidgets.QPushButton(self.side_menu)
         self.btn_menu3.setGeometry(QtCore.QRect(80, 309, 121, 21))
+        font = QtGui.QFont()
+        font.setFamily("Roboto")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.btn_menu3.setFont(font)
-        self.btn_menu3.setStyleSheet("color:  rgb(255, 255, 255);\n"
+        self.btn_menu3.setStyleSheet("color: rgb(125, 135, 141);\n"
 "border: none;\n"
 "text-align: left")
         self.btn_menu3.setCheckable(False)
         self.btn_menu3.setObjectName("btn_menu3")
-        self.btn_menu3.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_menu4 = QtWidgets.QPushButton(self.side_menu)
         self.btn_menu4.setGeometry(QtCore.QRect(80, 361, 121, 21))
+        font = QtGui.QFont()
+        font.setFamily("Roboto")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.btn_menu4.setFont(font)
-        self.btn_menu4.setStyleSheet("color:  rgb(255, 255, 255);\n"
+        self.btn_menu4.setStyleSheet("color: rgb(125, 135, 141);\n"
 "border: none;\n"
 "text-align: left")
         self.btn_menu4.setCheckable(False)
         self.btn_menu4.setObjectName("btn_menu4")
-        self.btn_menu4.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_menu5 = QtWidgets.QPushButton(self.side_menu)
         self.btn_menu5.setGeometry(QtCore.QRect(80, 413, 221, 21))
+        font = QtGui.QFont()
+        font.setFamily("Roboto")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.btn_menu5.setFont(font)
-        self.btn_menu5.setStyleSheet("color:  rgb(255, 255, 255);\n"
+        self.btn_menu5.setStyleSheet("color: rgb(125, 135, 141);\n"
 "border: none;\n"
 "text-align: left")
         self.btn_menu5.setCheckable(False)
         self.btn_menu5.setObjectName("btn_menu5")
-        self.btn_menu5.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_menu6 = QtWidgets.QPushButton(self.side_menu)
         self.btn_menu6.setGeometry(QtCore.QRect(80, 465, 221, 21))
+        font = QtGui.QFont()
+        font.setFamily("Roboto")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.btn_menu6.setFont(font)
-        self.btn_menu6.setStyleSheet("color:  rgb(255, 255, 255);\n"
+        self.btn_menu6.setStyleSheet("color: rgb(125, 135, 141);\n"
 "border: none;\n"
 "text-align: left")
         self.btn_menu6.setCheckable(False)
         self.btn_menu6.setObjectName("btn_menu6")
-        self.btn_menu6.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_menu7 = QtWidgets.QPushButton(self.side_menu)
         self.btn_menu7.setGeometry(QtCore.QRect(80, 517, 221, 21))
+        font = QtGui.QFont()
+        font.setFamily("Roboto")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.btn_menu7.setFont(font)
-        self.btn_menu7.setStyleSheet("color: rgb(255, 255, 255);\n"
+        self.btn_menu7.setStyleSheet("color: rgb(125, 135, 141);\n"
 "border: none;\n"
 "text-align: left")
         self.btn_menu7.setCheckable(False)
         self.btn_menu7.setObjectName("btn_menu7")
-        # self.btn_menu7.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.stackedWelcome.addWidget(self.main)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWelcome.setCurrentIndex(0)
+        self.stackedWelcome.setCurrentIndex(1)
         self.stackedMain.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -723,7 +733,7 @@ class Ui_MainWindow(object):
         self.description.setText(_translate("MainWindow", "The first step allows to view the information about the raw data in textual and visual format. The graphs are interactive. \"Plot PSD\" plots power spectral diagram."))
         self.step.setText(_translate("MainWindow", "RAW DATA"))
         self.btn_preprocess.setText(_translate("MainWindow", "Preprocessing"))
-        self.out_console.setText(_translate("MainWindow", "Output"))
+        self.out_console.setText(_translate("MainWindow", "Helloo darkness"))
         self.btn_plot_pds.setText(_translate("MainWindow", "Plot PSD"))
         self.menu_8.setText(_translate("MainWindow", "PREPROCESSING"))
         self.label_6.setText(_translate("MainWindow", "We preprocess our data to make it more suitable for training and obtaining the best results. Here we clean up our data by performing independent components analysis (ICA). We exclude unneeded parameters and apply the ICA. "))

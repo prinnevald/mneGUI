@@ -4,7 +4,8 @@ from ui_code import Ui_MainWindow
 
 import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 matplotlib.use('Qt5Agg')
 from matplotlib.figure import Figure
 
@@ -21,12 +22,6 @@ MY_DPI = 192
 
 def pos_by_pixel(num):
     return num/MY_DPI
-
-class MplCanvas( FigureCanvasQTAgg):
-    def __init__(self, parent=None, width=5, height=4, dpi=100):
-        fig = Figure(figsize=(width, height), dpi=dpi)
-        self.axes = fig.add_subplot(111)
-        super(MplCanvas, self).__init__(fig)
 
 class MainWindow:
     def __init__(self):
@@ -63,6 +58,7 @@ class MainWindow:
         # BUTTONS connect
         self.ui.btn_text_info.clicked.connect(self.print_data)
         self.ui.btn_visualize.clicked.connect(self.raw_visualize)
+        self.ui.btn_plot_pds.clicked.connect(self.raw_plot_pds)
         self.ui.btn_preprocess_plot.clicked.connect(self.preprocess_plot)
         self.ui.btn_comparesignals.clicked.connect(self.preprocess_compare_signals)
         self.ui.btn_findevents.clicked.connect(self.events_find)
@@ -74,15 +70,34 @@ class MainWindow:
         self.ui.btn_evoked2.clicked.connect(self.evoked_detailed_plot)
         self.ui.btn_evoked1.clicked.connect(self.evoked_difference_wave)
 
+    # plot graphs driver
+    # def plot_graph(self, figure):
+    #     try:
+    #         self.ui.canvas.setParent(None)
+    #         self.ui.toolbar.setParent(None)
+    #     except AttributeError:
+    #         print("Canvas doesnt exist!")
+    #     self.ui.canvas = FigureCanvas(figure)
+    #     self.ui.toolbar = NavigationToolbar(self.ui.canvas, self.ui.out_raw)
+    #     self.ui.canvas.setGeometry(QtCore.QRect(0, 0, 900/MY_DPI, 900/MY_DPI))
+    #     self.ui.layout.addWidget(self.ui.toolbar)
+    #     self.ui.layout.addWidget(self.ui.canvas)
+    #     # axes
+    #     self.ui.canvas.draw()
+
     # UPLOAD dataset
 
     def upload_dataset(self):
         # returns a tuple (fname, ".ext")
         # throw exception if file was not chosen
-        fname = QtWidgets.QFileDialog.getOpenFileName(self.main_win, "Open File", "", "All Files (*);; Sample (*.fif)")
+        fname, ext = QtWidgets.QFileDialog.getOpenFileName(self.main_win, "Open File", "", "All Files (*);; Sample (*.fif)")
         # only fif for now // works
-        raw = mne.io.read_raw_fif(fname[0])
-        self.raw_data = raw
+        if fname.endswith('.vhdr'):
+            raw = mne.io.read_raw_brainvision(fname)
+            self.raw_data = raw
+        elif fname.endswith('.fif'):
+            raw = mne.io.read_raw_fif(fname[0])
+            self.raw_data = raw
         self.to_main()
         
     def select_dataset(self):
@@ -122,24 +137,30 @@ class MainWindow:
 
     def print_data(self):
         # Print to the console        
+        try:
+            self.ui.canvas.setParent(None)
+            self.ui.toolbar.setParent(None)
+        except AttributeError:
+            print("Canvas doesnt exist!")
         self.ui.out_console.setText(str(self.raw_data.info))
 
     def raw_visualize(self):
         self.ui.out_console.hide()
-        data = self.raw_data.get_data()
-        pos = QtCore.QPoint(pos_by_pixel(67), pos_by_pixel(439))
-        raw_plot = MplCanvas(self, width=pos_by_pixel(363), height=pos_by_pixel(300), dpi=MY_DPI)
-        raw_plot.move(pos)
-        raw_plot.axes.plot(data)
-        raw_plot.show()
+        self.ui.figure = self.raw_data.plot()
+        # self.plot_graph(self.ui.figure)
 
+    def raw_plot_pds(self):
+        self.ui.out_console.hide()
+        self.ui.figure = self.raw_data.plot_psd()
+        # self.plot_graph(self.ui.figure)
+   
     # PREPROCESS functions
-
     def preprocess_plot(self):
         ica = mne.preprocessing.ICA(n_components=20, random_state=97, max_iter=800)
         ica.fit(self.raw_data)
         ica.exclude = [1, 2]
-        #ica.plot_properties(self.raw_data, picks=ica.exclude)
+        self.ui.figure = ica.plot_properties(self.raw_data, picks=ica.exclude)
+        # self.plot_graph(self.ui.figure)
         self.ica = ica
 
     def preprocess_compare_signals(self):
@@ -153,8 +174,8 @@ class MainWindow:
                 'EEG 001', 'EEG 002', 'EEG 003', 'EEG 004', 'EEG 005', 'EEG 006',
                 'EEG 007', 'EEG 008']
         chan_idxs = [self.raw_data.ch_names.index(ch) for ch in chs]
-        # orig_raw.plot(order=chan_idxs, start=12, duration=4)
-        # self.raw_data.plot(order=chan_idxs, start=12, duration=4)
+        orig_raw.plot(order=chan_idxs, start=12, duration=4)
+        self.raw_data.plot(order=chan_idxs, start=12, duration=4)
 
     # EVENTS functions
 
@@ -171,8 +192,8 @@ class MainWindow:
         event_dict = {'auditory/left': 1, 'auditory/right': 2, 'visual/left': 3,
                 'visual/right': 4, 'smiley': 5, 'buttonpress': 32}
         self.event_dict = event_dict
-        # fig = mne.viz.plot_events(events, event_id=event_dict, sfreq=raw.info['sfreq'],
-                            # first_samp=raw.first_samp)
+        fig = mne.viz.plot_events(events, event_id=event_dict, sfreq=raw.info['sfreq'],
+                            first_samp=raw.first_samp)
 
     # EPOCH functions
 
@@ -197,8 +218,7 @@ class MainWindow:
 
     
     def epoch_plot(self):
-        pass
-        # self.aud_epochs.plot_image(picks=['MEG 1332', 'EEG 021']) 
+        self.aud_epochs.plot_image(picks=['MEG 1332', 'EEG 021']) 
         # graph here and logs
 
     # TFA functions
@@ -207,7 +227,7 @@ class MainWindow:
         frequencies = np.arange(7, 30, 3)
         power = mne.time_frequency.tfr_morlet(self.aud_epochs, n_cycles=2, return_itc=False,
                                             freqs=frequencies, decim=3)
-        # power.plot(['MEG 1332'])
+        power.plot(['MEG 1332'])
     
     # EVOKED functions
 
@@ -215,19 +235,19 @@ class MainWindow:
         self.aud_evoked = self.aud_epochs.average()
         self.vis_evoked = self.vis_epochs.average()
 
-        # mne.viz.plot_compare_evokeds(dict(auditory=self.aud_evoked, visual=self.vis_evoked),
-        #                             legend='upper left', show_sensors='upper right')
+        mne.viz.plot_compare_evokeds(dict(auditory=self.aud_evoked, visual=self.vis_evoked),
+                                     legend='upper left', show_sensors='upper right')
         # graph and logs
 
     def evoked_detailed_plot(self):
-        pass
-        # self.aud_evoked.plot_joint(picks='eeg')
-        # self.aud_evoked.plot_topomap(times=[0., 0.08, 0.1, 0.12, 0.2], ch_type='eeg')
+        self.aud_evoked.plot_joint(picks='eeg')
+        self.aud_evoked.plot_topomap(times=[0., 0.08, 0.1, 0.12, 0.2], ch_type='eeg')
         # graph and logs
 
     def evoked_difference_wave(self):
         evoked_diff = mne.combine_evoked([self.aud_evoked, self.vis_evoked], weights=[1, -1])
         evoked_diff.pick_types(meg='mag').plot_topo(color='r', legend=False)
+    
     # ML functions
 
 if __name__ == '__main__':
